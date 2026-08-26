@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ExamGuard Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+</head>
+<body>
+
+    <h1>Candidate Registration</h1>
+
+    <form method="POST">
+
+        <label>Name</label>
+        <input type="text" name="name">
+
+        <br><br>
+
+        <label>Email</label>
+        <input type="email" name="email">
+
+        <br><br>
+
+        <label>Password</label>
+        <input type="password" name="password">
+
+        <br><br>
+
+        <button type="submit">Register</button>
+
+    </form>
+
+</body>
+</html>
