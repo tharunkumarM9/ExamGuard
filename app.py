@@ -55,9 +55,7 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-
     if request.method == "POST":
-
         email = request.form["email"]
         password = request.form["password"]
 
@@ -65,8 +63,8 @@ def login():
 
         candidate = connection.execute(
             """
-            SELECT *
-            FROM candidates
+            SELECT * 
+            FROM candidates 
             WHERE email = ? AND password = ?
             """,
             (email, password)
@@ -76,7 +74,7 @@ def login():
 
         if candidate:
             return "Login successful!"
-
+        
         return "Invalid email or password"
 
     return render_template("login.html")
