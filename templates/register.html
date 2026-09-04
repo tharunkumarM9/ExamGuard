@@ -149,27 +149,79 @@
 
 
         <br><br>
-<<<<<<< Updated upstream
-        <label>Photo</label>
-=======
 
 
         <!-- CAMERA -->
->>>>>>> Stashed changes
 
-        <input type="file" name="photo" accept="image/*" required>
-        <br><br>
+        <h3>Candidate Photo</h3>
 
-<<<<<<< Updated upstream
-        
 
-        <button type="submit">
-            Register
+        <video
+            id="camera"
+            autoplay
+            playsinline
+        ></video>
+
+
+        <br>
+
+
+        <!-- START CAMERA -->
+
+        <button
+            type="button"
+            id="startCamera"
+        >
+
+            Start Camera
+
         </button>
 
-    </form>
 
-=======
+        <!-- CAPTURE PHOTO -->
+
+        <button
+            type="button"
+            id="capturePhoto"
+            disabled
+        >
+
+            Capture Photo
+
+        </button>
+
+
+        <!-- CANVAS -->
+
+        <canvas id="canvas"></canvas>
+
+
+        <!-- PHOTO PREVIEW -->
+
+        <img
+            id="preview"
+            alt="Captured Photo"
+        >
+
+
+        <p id="photoStatus"></p>
+
+
+        <br>
+
+
+        <!-- REGISTER -->
+
+        <button
+            type="submit"
+            id="registerButton"
+            disabled
+        >
+
+            Register
+
+        </button>
+
 
     </form>
 
@@ -420,7 +472,6 @@
 </script>
 
 
->>>>>>> Stashed changes
 </body>
 
 </html>
