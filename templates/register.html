@@ -1,109 +1,166 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
-    <title>ExamGuard Registration</title>
+
+    <title>Candidate Registration</title>
+
 
     <style>
+
         body {
-            margin: 0;
+
             font-family: Arial, sans-serif;
-            background: #f2f0e8;
-            color: #26332d;
-            text-align: center;
+
+            margin: 40px;
+
         }
 
-        h1 {
-            margin-top: 80px;
-            color: #34483d;
+
+        .form-container {
+
+            width: 500px;
+
+            margin: auto;
+
         }
 
-        form {
-            width: 350px;
-            margin: 30px auto;
-            padding: 35px;
-            background: #ffffff;
-            border: 1px solid #d9ddd5;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(38, 51, 45, 0.08);
-            text-align: left;
-        }
-
-        label {
-            color: #46574d;
-            font-weight: bold;
-        }
 
         input {
+
             width: 100%;
+
             padding: 10px;
-            margin-top: 8px;
-            border: 1px solid #c7cec8;
-            border-radius: 6px;
+
+            margin-top: 5px;
+
             box-sizing: border-box;
-            outline: none;
+
         }
 
-        input:focus {
-            border-color: #7d9184;
-        }
 
         button {
-            width: 100%;
-            padding: 11px;
-            border: none;
-            border-radius: 6px;
-            background: #536b5d;
-            color: white;
-            font-size: 15px;
+
+            padding: 10px 20px;
+
+            margin: 10px 5px 10px 0;
+
             cursor: pointer;
+
         }
 
-        button:hover {
-            background: #3f5548;
+
+        video {
+
+            width: 400px;
+
+            height: 300px;
+
+            border: 2px solid black;
+
+            display: block;
+
+            margin-top: 10px;
+
         }
+
+
+        #preview {
+
+            width: 400px;
+
+            border: 2px solid green;
+
+            margin-top: 10px;
+
+            display: none;
+
+        }
+
+
+        #canvas {
+
+            display: none;
+
+        }
+
+
+        #photoStatus {
+
+            font-weight: bold;
+
+        }
+
     </style>
 
 </head>
 
+
 <body>
 
-    <h1>Candidate Registration</h1>
 
-    <form method="POST" enctype="multipart/form-data">
+<div class="form-container">
+
+
+    <h2>Candidate Registration</h2>
+
+
+    <form method="POST" id="registerForm">
+
+
+        <!-- NAME -->
 
         <label>Name</label>
 
-        <input 
-            type="text" 
+        <input
+            type="text"
             name="name"
+            required
         >
 
-        <br><br>
+
+        <br>
+
+
+        <!-- EMAIL -->
 
         <label>Email</label>
 
-        <input 
-            type="email" 
+        <input
+            type="email"
             name="email"
+            required
         >
 
-        <br><br>
+
+        <br>
+
+
+        <!-- PASSWORD -->
 
         <label>Password</label>
 
-
-        <input 
-            type="password" 
+        <input
+            type="password"
             name="password"
+            required
         >
 
+
         <br><br>
+<<<<<<< Updated upstream
         <label>Photo</label>
+=======
+
+
+        <!-- CAMERA -->
+>>>>>>> Stashed changes
 
         <input type="file" name="photo" accept="image/*" required>
         <br><br>
 
+<<<<<<< Updated upstream
         
 
         <button type="submit">
@@ -112,6 +169,258 @@
 
     </form>
 
+=======
+
+    </form>
+
+
+</div>
+
+
+<script>
+
+
+    // ----------------------------------------
+    // Get HTML elements
+    // ----------------------------------------
+
+    const video =
+        document.getElementById("camera");
+
+
+    const canvas =
+        document.getElementById("canvas");
+
+
+    const preview =
+        document.getElementById("preview");
+
+
+    const startCameraButton =
+        document.getElementById("startCamera");
+
+
+    const captureButton =
+        document.getElementById("capturePhoto");
+
+
+    const registerButton =
+        document.getElementById("registerButton");
+
+
+    const photoStatus =
+        document.getElementById("photoStatus");
+
+
+    // Store camera stream
+
+    let cameraStream = null;
+
+
+
+    // ----------------------------------------
+    // START CAMERA
+    // ----------------------------------------
+
+    startCameraButton.addEventListener(
+        "click",
+        async function () {
+
+            try {
+
+                // Ask browser for camera permission
+
+                cameraStream =
+                    await navigator.mediaDevices.getUserMedia({
+
+                        video: true
+
+                    });
+
+
+                // Show camera inside video element
+
+                video.srcObject =
+                    cameraStream;
+
+
+                // Enable capture button
+
+                captureButton.disabled =
+                    false
+                photoStatus.textContent =
+                    "Camera started. Position your face and click Capture Photo.";
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+
+                photoStatus.textContent =
+                    "Unable to access camera. Please allow camera permission.";
+
+            }
+
+        }
+    );
+
+
+
+    // ----------------------------------------
+    // CAPTURE PHOTO
+    // ----------------------------------------
+
+    captureButton.addEventListener(
+        "click",
+        function () {
+
+
+            // Set canvas size same as camera
+
+            canvas.width =
+                video.videoWidth;
+
+
+            canvas.height =
+                video.videoHeight;
+
+
+            // Get canvas drawing context
+
+            const context =
+                canvas.getContext("2d");
+
+
+            // Copy video frame to canvas
+
+            context.drawImage(
+                video,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            // Display captured image
+
+            const imageData =
+                canvas.toDataURL("image/jpeg");
+
+
+            preview.src =
+                imageData;
+
+
+            preview.style.display =
+                "block";
+
+
+            photoStatus.textContent =
+                "Photo captured. Saving...";
+
+
+
+            // Convert canvas image
+            // into Blob
+
+            canvas.toBlob(
+                async function (blob) {
+
+
+                    // Create form data
+
+                    const formData =
+                        new FormData();
+
+
+                    // Add photo
+
+                    formData.append(
+                        "photo",
+                        blob,
+                        "candidate.jpg"
+                    );
+
+
+
+                    // Send photo to Flask
+
+                    const response =
+                        await fetch(
+                            "/capture-photo",
+                            {
+                                method: "POST",
+                                body: formData
+                            }
+                        );
+
+
+
+                    // Convert response to JSON
+
+                    const result =
+                        await response.json();
+
+
+
+                    // Check result
+
+                    if (result.success) {
+
+
+                        photoStatus.textContent =
+                            "Photo captured successfully!";
+
+
+                        // Enable Register button
+
+                        registerButton.disabled =
+                            false;
+
+
+
+                        // Stop camera
+
+                        if (cameraStream) {
+
+                            cameraStream
+                                .getTracks()
+                                .forEach(
+                                    function(track) {
+
+                                        track.stop();
+
+                                    }
+                                );
+
+                        }
+
+                    }
+
+                    else {
+
+
+                        photoStatus.textContent =
+                            "Photo capture failed.";
+
+                    }
+
+
+                },
+                "image/jpeg"
+            );
+
+        }
+    );
+
+
+</script>
+
+
+>>>>>>> Stashed changes
 </body>
 
 </html>

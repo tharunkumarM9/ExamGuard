@@ -20,6 +20,7 @@ def home():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+<<<<<<< Updated upstream
 
     if request.method == "POST":
 
@@ -39,6 +40,31 @@ def register():
         photo.save(photo_path)
 
         connection = get_db()
+=======
+    if request.method == 'POST':
+        username = request.form.get('name', '').strip()
+        email = request.form.get('email', '').strip()
+        password = request.form.get('password', '').strip()
+       # photo = request.files.get('candidate_photo')
+
+        if not username or not email or not password:
+            return render_template('register.html', error="Please fill in all required fields.")
+        photo_path = session.get("capture_photo")
+        if not photo_path:
+            return render_template('register.html', error="Please capture a photo before registering.")
+    try:    
+        connection = get_db()
+        print("candidate email:", email)
+
+        
+    
+        
+        # Check if email is already registered
+        # connection.execute("SELECT id FROM candidates WHERE email = ?", (email,))
+        # if connection.fetchone():
+        #     connection.close()
+        #     return render_template('register.html', error="An account with this email already exists.")
+>>>>>>> Stashed changes
 
         connection.execute(
             """
@@ -50,10 +76,29 @@ def register():
         )
 
         connection.commit()
+<<<<<<< Updated upstream
         connection.close()
 
        # return "Registration successful" 
         return redirect("/login") 
+=======
+        # connection.close()
+        session.pop("capture_photo", None)
+        print("Registration successful for:", username)
+
+        # return render_template('register.html', success=True, username=username)
+        print("Registration successful for:", username)
+        print("Redirecting to login page...")
+        return redirect("/login")
+        print("Registration successful for:")
+    except Exception as e:
+        connection.rollback()
+    
+        print("Error during registration:", e)
+        return render_template('register.html', error="An error occurred during registration. Please try again.")
+    finally:
+        connection.close()
+>>>>>>> Stashed changes
 
     return render_template("register.html")
 
