@@ -133,37 +133,37 @@ def register():
     return render_template('register.html')
 
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
+# @app.route("/login", methods=["GET", "POST"])
+# def login():
 
-    if request.method == "POST":
+#     if request.method == "POST":
 
-        email = request.form["email"]
-        password = request.form["password"]
+#         email = request.form["email"]
+#         password = request.form["password"]
 
-        connection = get_db()
+#         connection = get_db()
 
-        candidate = connection.execute(
-            """
-            SELECT *
-            FROM candidates
-            WHERE email = ?  
-            """,
-            (email,)
-        ).fetchone()
+#         candidate = connection.execute(
+#             """
+#             SELECT *
+#             FROM candidates
+#             WHERE email = ?  
+#             """,
+#             (email,)
+#         ).fetchone()
 
-        connection.close()
+#         connection.close()
 
-        if candidate and check_password_hash(candidate["password"], password):
-            session["candidate_id"] = candidate["id"]
-            return redirect("/dashboard")
+#         if candidate and check_password_hash(candidate["password"], password):
+#             session["candidate_id"] = candidate["id"]
+#             return redirect("/dashboard")
 
-        return "Invalid email or password"
+#         return "Invalid email or password"
 
-    return render_template("login.html")
+#     return render_template("login.html")
 
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/login", methods =["GET", "POST"])
 def login():
 
     if request.method == "POST":
@@ -204,7 +204,6 @@ def dashboard():
 
 @app.route("/logout")
 def logout():
-
     session.clear()
     return redirect("/login")
 
