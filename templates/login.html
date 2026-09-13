@@ -1,102 +1,738 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>ExamGuard Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ExamGuard | Candidate Login</title>
 
     <style>
-        body {
+
+
+        * {
+            box-sizing: border-box;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f2f0e8;
+            padding: 0;
+        }
+
+
+        body {
+            min-height: 100vh;
+
+            font-family: "Segoe UI", Arial, sans-serif;
+
             color: #26332d;
-            text-align: center;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow-x: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    #d8eee2 0,
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    #dcefe5 0,
+                    transparent 30%
+                ),
+                #f2f0e8;
         }
 
-        h1 {
-            margin-top: 80px;
-            color: #34483d;
+
+        body::before,
+        body::after {
+            content: "";
+
+            position: fixed;
+
+            border-radius: 50%;
+
+            z-index: -1;
+
+            opacity: 0.45;
+
+            animation: float 7s ease-in-out infinite;
         }
 
-        form {
+
+        body::before {
+            width: 300px;
+            height: 300px;
+
+            background: #b9dcc9;
+
+            top: -130px;
+            left: -100px;
+        }
+
+
+        body::after {
             width: 350px;
-            margin: 30px auto;
-            padding: 35px;
-            background: #ffffff;
-            border: 1px solid #d9ddd5;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(38, 51, 45, 0.08);
-            text-align: left;
+            height: 350px;
+
+            background: #c9e5d5;
+
+            bottom: -170px;
+            right: -120px;
+
+            animation-delay: 2s;
         }
+
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(20px);
+            }
+        }
+
+        .page {
+            width: 100%;
+            max-width: 480px;
+
+            padding: 25px;
+
+            margin: 0 auto;
+
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .heading {
+            width: 100%;
+
+            text-align: center;
+
+            margin: 0 0 25px 0;
+        }
+
+
+        .heading h1 {
+            margin: 0;
+
+            color: #214d3b;
+
+            font-size: 34px;
+
+            font-weight: 750;
+
+            letter-spacing: -0.5px;
+        }
+
+
+        .heading p {
+            margin: 8px 0 0;
+
+            color: #718077;
+
+            font-size: 14px;
+        }
+
+
+        /* Decorative line */
+
+        .leaf {
+            width: 55px;
+            height: 4px;
+
+            background: #b8dcca;
+
+            margin: 15px auto 0;
+
+            border-radius: 10px;
+
+            position: relative;
+        }
+
+
+        .leaf::after {
+            content: "◆";
+
+            position: absolute;
+
+            color: #4f9a77;
+
+            font-size: 16px;
+
+            left: 19px;
+            top: -11px;
+
+            background: #f2f0e8;
+
+            padding: 0 5px;
+
+            transform: rotate(45deg);
+        }
+
+
+        .login-card {
+            width: 100%;
+
+            margin: 0 auto;
+
+            padding: 40px;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            border: 1px solid rgba(217, 221, 213, 0.9);
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 25px 60px rgba(38, 51, 45, 0.13),
+                0 5px 15px rgba(38, 51, 45, 0.05);
+
+            backdrop-filter: blur(10px);
+
+            animation: cardAppear 0.7s ease;
+        }
+
+
+        @keyframes cardAppear {
+
+            from {
+                opacity: 0;
+
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform: translateY(0);
+            }
+        }
+
+
+        .brand-title {
+            text-align: center;
+
+            color: #34483d;
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            margin-bottom: 30px;
+        }
+
+
+        .brand-title span {
+            display: inline-flex;
+
+            width: 48px;
+            height: 48px;
+
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 50%;
+
+            background: #e2f1e8;
+
+            color: #39775b;
+
+            font-size: 22px;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* =========================
+           INPUT GROUP
+        ========================== */
+
+        .input-group {
+            width: 100%;
+
+            margin-bottom: 22px;
+        }
+
 
         label {
-            color: #46574d;
-            font-weight: bold;
+            display: block;
+
+            color: #34483d;
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+            margin-bottom: 8px;
         }
+
+
+        /* =========================
+           INPUT WRAPPER
+        ========================== */
+
+        .input-wrapper {
+            width: 100%;
+
+            position: relative;
+        }
+
+
+        /* Input icons */
+
+        .input-icon {
+            position: absolute;
+
+            left: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 17px;
+
+            color: #668274;
+
+            pointer-events: none;
+
+            z-index: 2;
+        }
+
+
 
         input {
+            display: block;
+
             width: 100%;
-            padding: 10px;
-            margin-top: 8px;
-            border: 1px solid #c7cec8;
-            border-radius: 6px;
-            box-sizing: border-box;
+
+            height: 52px;
+
+            padding: 0 45px 0 45px;
+
+            border: 1.5px solid #cbd5ce;
+
+            border-radius: 11px;
+
             outline: none;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            color: #26332d;
+
+            background: #fbfcfb;
+
+            transition: all 0.25s ease;
         }
+
+
+        input::placeholder {
+            color: #a0aaa5;
+        }
+
+
+        input:hover {
+            border-color: #91aa9b;
+        }
+
 
         input:focus {
-            border-color: #7d9184;
+            border-color: #4f8067;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 0 0 4px rgba(79, 128, 103, 0.12);
         }
 
-        button {
-            width: 100%;
-            padding: 11px;
+
+        /* =========================
+           SHOW PASSWORD BUTTON
+        ========================== */
+
+        .show-password {
+            position: absolute;
+
+            right: 12px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 35px;
+            height: 35px;
+
             border: none;
-            border-radius: 6px;
-            background: #536b5d;
-            color: white;
-            font-size: 15px;
+
+            background: transparent;
+
+            color: #70857a;
+
             cursor: pointer;
+
+            font-size: 17px;
+
+            padding: 5px;
+
+            border-radius: 50%;
         }
 
-        button:hover {
-            background: #3f5548;
+
+        .show-password:hover {
+            background: #edf6f0;
+
+            color: #3f5548;
         }
+
+
+        /* =========================
+           LOGIN BUTTON
+        ========================== */
+
+        button.login-btn {
+            display: block;
+
+            width: 100%;
+
+            height: 53px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5c7768,
+                    #3f5f4f
+                );
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            margin-top: 4px;
+
+            box-shadow:
+                0 8px 18px rgba(63, 95, 79, 0.22);
+
+            transition: all 0.25s ease;
+        }
+
+
+        button.login-btn:hover {
+            transform: translateY(-2px);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f6d5d,
+                    #344f41
+                );
+
+            box-shadow:
+                0 12px 25px rgba(63, 95, 79, 0.30);
+        }
+
+
+        button.login-btn:active {
+            transform: translateY(0);
+        }
+
+
+        /* Arrow */
+
+        .arrow {
+            margin-left: 8px;
+
+            font-size: 18px;
+
+            transition: margin-left 0.2s ease;
+        }
+
+
+        button.login-btn:hover .arrow {
+            margin-left: 14px;
+        }
+
+        .login-info {
+            width: 100%;
+
+            margin-top: 22px;
+
+            padding: 13px 15px;
+
+            border-radius: 10px;
+
+            background: #edf6f0;
+
+            color: #527263;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+        .forgot-link {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 17px;
+
+            color: #536b5d;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        .forgot-link:hover {
+            color: #344f41;
+
+            text-decoration: underline;
+        }
+
+
+        @media (max-width: 520px) {
+
+            .page {
+                max-width: 100%;
+
+                padding: 18px;
+            }
+
+
+            .heading h1 {
+                font-size: 29px;
+            }
+
+
+            .heading p {
+                font-size: 13px;
+            }
+
+
+            .login-card {
+                padding: 28px 22px;
+
+                border-radius: 18px;
+            }
+        }
+
+
+        /* Small phones */
+
+        @media (max-width: 360px) {
+
+            .heading h1 {
+                font-size: 26px;
+            }
+
+
+            .login-card {
+                padding: 25px 18px;
+            }
+        }
+
     </style>
 
 </head>
 
+
 <body>
 
-    <h1>Candidate Login</h1>
+    <main class="page">
 
-    <form method="POST">
 
-        <label>Email:</label>
+        <div class="heading">
 
-        <input 
-            type="email" 
-            name="email" 
-            required
-        >
+            <h1>Candidate Login</h1>
 
-        <br><br>
+            <p>
+                Access your ExamGuard candidate account
+            </p>
 
-        <label>Password:</label>
+            <div class="leaf"></div>
 
-        <input 
-            type="password" 
-            name="password" 
-            required
-        >
+        </div>
 
-        <br><br>
 
-        <button type="submit">
-            Login
-        </button>
 
-    </form>
+        <div class="login-card">
+
+
+            <!-- ExamGuard -->
+
+            <div class="brand-title">
+
+                <span>🛡</span>
+
+                <br>
+
+                ExamGuard
+
+            </div>
+
+
+
+            <!-- Login Form -->
+
+            <form method="POST">
+
+
+                <!-- EMAIL -->
+
+                <div class="input-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            ✉
+                        </span>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email address"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            🔒
+                        </span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            onclick="togglePassword()"
+                            aria-label="Show password"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    Login
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- INFORMATION -->
+
+            <div class="login-info">
+
+                ℹ️ &nbsp;
+                Login with your registered email and password
+
+            </div>
+
+        
+
+        </div>
+
+    </main>
+
+    <script>
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const button =
+                document.querySelector(".show-password");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                button.textContent = "Hide";
+
+                button.setAttribute(
+                    "aria-label",
+                    "Hide password"
+                );
+
+            } else {
+
+                password.type = "password";
+
+                button.textContent = "👁";
+
+                button.setAttribute(
+                    "aria-label",
+                    "Show password"
+                );
+            }
+
+        }
+
+    </script>
+
 
 </body>
 

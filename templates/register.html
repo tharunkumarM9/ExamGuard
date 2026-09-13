@@ -6,93 +6,461 @@
 
     <title>Candidate Registration</title>
 
-
     <style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+
+    body {
+
+        font-family: Arial, sans-serif;
+
+        margin: 0;
+
+        padding: 35px;
+
+        min-height: 100vh;
+
+        background:
+            linear-gradient(
+                135deg,
+                #e8f5ff 0%,
+                #f5f0ff 50%,
+                #eafaf4 100%
+            );
+
+        color: #173b5c;
+
+    }
+
+
+    .form-container {
+
+        width: 100%;
+
+        max-width: 1050px;
+
+        margin: auto;
+
+        padding: 35px 40px;
+
+        background: rgba(255, 255, 255, 0.97);
+
+        border-radius: 20px;
+
+        border: 1px solid #d9e8f3;
+
+        box-shadow:
+            0 15px 40px rgba(30, 80, 130, 0.14);
+
+    }
+
+
+    h2 {
+
+        margin: 0 0 30px 0;
+
+        padding: 0 0 18px 15px;
+
+        font-size: 30px;
+
+        color: #123f68;
+
+        border-bottom: 2px solid #dceaf4;
+
+        position: relative;
+
+    }
+
+
+    /* Colour highlight beside heading */
+
+    h2::before {
+
+        content: "";
+
+        position: absolute;
+
+        left: 0;
+
+        top: 2px;
+
+        width: 5px;
+
+        height: 32px;
+
+        border-radius: 5px;
+
+        background:
+            linear-gradient(
+                #087bd0,
+                #6548d8
+            );
+
+    }
+
+    label {
+
+        display: block;
+
+        margin-top: 18px;
+
+        margin-bottom: 7px;
+
+        font-size: 14px;
+
+        font-weight: bold;
+
+        color: #245579;
+
+    }
+
+
+    input {
+
+        width: 100%;
+
+        height: 52px;
+
+        padding: 12px 16px;
+
+        margin-top: 0;
+
+        font-size: 15px;
+
+        color: #244862;
+
+        background: #fafdff;
+
+        border: 1px solid #c9dce9;
+
+        border-radius: 10px;
+
+        outline: none;
+
+        transition: all 0.25s;
+
+    }
+
+
+    input:hover {
+
+        border-color: #72b3d9;
+
+        background: #ffffff;
+
+    }
+
+
+
+    input:focus {
+
+        border-color: #087bd0;
+
+        background: #ffffff;
+
+        box-shadow:
+            0 0 0 4px rgba(8, 123, 208, 0.10);
+
+    }
+
+
+    input::placeholder {
+
+        color: #9aafbf;
+
+    }
+
+
+    h3 {
+
+        margin-top: 28px;
+
+        margin-bottom: 12px;
+
+        padding: 13px 18px;
+
+        font-size: 20px;
+
+        color: #124d70;
+
+        background:
+            linear-gradient(
+                90deg,
+                #e8f6ff,
+                #f2f0ff
+            );
+
+        border-left: 5px solid #087bd0;
+
+        border-radius: 8px;
+
+    }
+
+
+    video {
+
+        width: 100%;
+
+        max-width: 650px;
+
+        height: 300px;
+
+        display: block;
+
+        margin-top: 12px;
+
+        background: #59636c;
+
+        border: 4px solid #b8d9eb;
+
+        border-radius: 14px;
+
+        object-fit: cover;
+
+        box-shadow:
+            0 8px 22px rgba(30, 80, 120, 0.16);
+
+    }
+
+
+
+    button {
+
+        padding: 13px 22px;
+
+        margin: 14px 8px 10px 0;
+
+        border-radius: 9px;
+
+        border: none;
+
+        font-size: 14px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        transition: all 0.25s;
+
+    }
+
+
+    #startCamera {
+
+        color: white;
+
+        background:
+            linear-gradient(
+                135deg,
+                #087bd0,
+                #2665db
+            );
+
+        box-shadow:
+            0 5px 14px rgba(8, 123, 208, 0.22);
+
+    }
+
+
+    #startCamera:hover {
+
+        transform: translateY(-2px);
+
+        background:
+            linear-gradient(
+                135deg,
+                #056bb8,
+                #3651c9
+            );
+
+    }
+
+
+
+    #capturePhoto {
+
+        color: #17658d;
+
+        background: #ffffff;
+
+        border: 1px solid #b8d5e6;
+
+    }
+
+
+    #capturePhoto:hover:not(:disabled) {
+
+        background: #eaf7ff;
+
+        border-color: #58a9d4;
+
+        transform: translateY(-2px);
+
+    }
+
+
+  
+
+    button:disabled {
+
+        opacity: 0.45;
+
+        cursor: not-allowed;
+
+    }
+
+
+  
+
+    #preview {
+
+        width: 180px;
+
+        height: 180px;
+
+        margin-top: 15px;
+
+        display: none;
+
+        object-fit: cover;
+
+        border: 4px solid #25b86b;
+
+        border-radius: 12px;
+
+        background: white;
+
+        box-shadow:
+            0 7px 18px rgba(30, 150, 90, 0.18);
+
+    }
+
+
+   
+    #canvas {
+
+        display: none;
+
+    }
+
+
+    
+    #photoStatus {
+
+        display: inline-block;
+
+        margin-top: 10px;
+
+        padding: 9px 14px;
+
+        border-radius: 8px;
+
+        font-size: 13px;
+
+        font-weight: bold;
+
+        color: #176b91;
+
+        background: #eaf7ff;
+
+        border-left: 4px solid #087bd0;
+
+    }
+
+    #registerButton {
+
+        width: 100%;
+
+        margin-top: 25px;
+
+        padding: 16px;
+
+        border-radius: 11px;
+
+        border: none;
+
+        color: white;
+
+        font-size: 17px;
+
+        font-weight: bold;
+
+        letter-spacing: 0.8px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #087bd0,
+                #5b49d8
+            );
+
+        box-shadow:
+            0 8px 20px
+            rgba(55, 80, 200, 0.24);
+
+    }
+
+
+    #registerButton:hover:not(:disabled) {
+
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 12px 25px
+            rgba(55, 80, 200, 0.32);
+
+    }
+
+
+    /* ========================================
+       MOBILE
+    ======================================== */
+
+    @media (max-width: 700px) {
 
         body {
 
-            font-family: Arial, sans-serif;
-
-            margin: 40px;
+            padding: 15px;
 
         }
 
 
         .form-container {
 
-            width: 500px;
-
-            margin: auto;
+            padding: 25px 20px;
 
         }
 
 
-        input {
+        h2 {
 
-            width: 100%;
-
-            padding: 10px;
-
-            margin-top: 5px;
-
-            box-sizing: border-box;
-
-        }
-
-
-        button {
-
-            padding: 10px 20px;
-
-            margin: 10px 5px 10px 0;
-
-            cursor: pointer;
+            font-size: 25px;
 
         }
 
 
         video {
 
-            width: 400px;
-
-            height: 300px;
-
-            border: 2px solid black;
-
-            display: block;
-
-            margin-top: 10px;
+            height: 240px;
 
         }
 
 
-        #preview {
+        button {
 
-            width: 400px;
+            width: 100%;
 
-            border: 2px solid green;
-
-            margin-top: 10px;
-
-            display: none;
+            margin-right: 0;
 
         }
 
+    }
 
-        #canvas {
-
-            display: none;
-
-        }
-
-
-        #photoStatus {
-
-            font-weight: bold;
-
-        }
-
-    </style>
+</style>
+    
 
 </head>
 
