@@ -13,684 +13,739 @@
 
     <style>
 
-        /* =========================================
-           BASIC
-        ========================================= */
+    /* =========================================
+       RESET
+    ========================================== */
 
-        * {
-            box-sizing: border-box;
-        }
+    * {
+        box-sizing: border-box;
+    }
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f3f7fc;
-            color: #172b4d;
-        }
-
-
-        /* =========================================
-           HEADER
-        ========================================= */
-
-        .header {
-            min-height: 105px;
-
-            background: linear-gradient(
-                135deg,
-                #172b4d,
-                #203b68
-            );
-
-            color: white;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 20px 45px;
-        }
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f3f7fc;
+        color: #172b4d;
+    }
 
 
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+    /* =========================================
+       HEADER
+    ========================================== */
+
+    .header {
+        min-height: 105px;
+
+        background: linear-gradient(
+            135deg,
+            #123d78,
+            #1769c2,
+            #1677ff
+        );
+
+        color: white;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 20px 45px;
+
+        box-shadow:
+            0 4px 18px rgba(23, 74, 130, 0.25);
+    }
 
 
-        .logo {
-            font-size: 34px;
-            font-weight: bold;
-        }
+    .logo-area {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
 
 
-        .logo span {
-            color: #20a9ff;
-        }
+    .logo {
+        font-size: 34px;
+        font-weight: bold;
+        letter-spacing: -1px;
+    }
 
 
-        .divider {
-            width: 1px;
-            height: 48px;
-            background: #9fb3d1;
-        }
+    .logo span {
+        color: #65b8ff;
+    }
 
 
-        .exam-title {
-            font-size: 25px;
-            font-weight: bold;
-        }
+    .divider {
+        width: 1px;
+        height: 48px;
+        background: rgba(255, 255, 255, 0.55);
+    }
 
 
-        .exam-subtitle {
-            margin-top: 6px;
-            color: #c7d5e9;
-            font-size: 14px;
-        }
+    .exam-title {
+        font-size: 25px;
+        font-weight: bold;
+    }
 
 
-        .candidate {
-            font-size: 16px;
-            font-weight: bold;
-            white-space: nowrap;
-        }
+    .exam-subtitle {
+        margin-top: 6px;
+        color: #d6e9ff;
+        font-size: 14px;
+    }
 
 
-        /* =========================================
-           MAIN CONTAINER
-        ========================================= */
+    .candidate {
+        font-size: 16px;
+        font-weight: bold;
+        white-space: nowrap;
+    }
 
-        .container {
-            width: 96%;
-            max-width: 1500px;
-            margin: 25px auto;
-        }
 
+    /* =========================================
+       MAIN CONTAINER
+    ========================================== */
+
+    .container {
+        width: 96%;
+        max-width: 1500px;
+        margin: 28px auto;
+    }
+
+
+    .exam-layout {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            360px;
+
+        gap: 22px;
+
+        align-items: start;
+    }
+
+
+    /* =========================================
+       CARD
+    ========================================== */
+
+    .card {
+        background: white;
+
+        border: 1px solid #d6e5f5;
+
+        border-radius: 13px;
+
+        box-shadow:
+            0 5px 20px
+            rgba(25, 70, 120, 0.08);
+    }
+
+
+    /* =========================================
+       QUESTION HEADER
+    ========================================== */
+
+    .question-header {
+        padding: 22px 25px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 20px;
+    }
+
+
+    .question-number {
+        font-size: 25px;
+        font-weight: bold;
+        color: #123d78;
+    }
+
+
+    .progress-area {
+        display: flex;
+        align-items: center;
+
+        gap: 14px;
+
+        margin-top: 17px;
+    }
+
+
+    .progress-bar {
+        height: 10px;
+
+        background: #dceafa;
+
+        border-radius: 20px;
+
+        overflow: hidden;
+
+        width: 100%;
+    }
+
+
+    .progress {
+        height: 100%;
+
+        width: 6.66%;
+
+        background: linear-gradient(
+            90deg,
+            #1268df,
+            #20a9ff
+        );
+
+        border-radius: 20px;
+
+        transition: 0.3s;
+    }
+
+
+    .progress-text {
+        color: #52708f;
+
+        font-weight: bold;
+
+        white-space: nowrap;
+    }
+
+
+    /* =========================================
+       TIMER
+    ========================================== */
+
+    .timer-box {
+        min-width: 160px;
+
+        padding: 13px 18px;
+
+        background: #fff1f5;
+
+        border: 1px solid #ffd1dc;
+
+        border-radius: 12px;
+
+        text-align: center;
+    }
+
+
+    .timer-title {
+        color: #e23858;
+
+        font-size: 13px;
+
+        font-weight: bold;
+    }
+
+
+    #timer {
+        color: #d92348;
+
+        font-size: 28px;
+
+        font-weight: bold;
+
+        margin-top: 5px;
+    }
+
+
+    /* =========================================
+       QUESTION AREA
+    ========================================== */
+
+    #questionsContainer {
+        margin-top: 18px;
+    }
+
+
+    .question-card {
+        display: none;
+
+        padding: 30px 25px;
+    }
+
+
+    .question-card.active {
+        display: block;
+    }
+
+
+    .question-card h2 {
+        margin-top: 0;
+
+        color: #123d78;
+
+        font-size: 22px;
+
+        line-height: 1.5;
+    }
+
+
+    /* =========================================
+       CODE BOX
+    ========================================== */
+
+    .code-box {
+        background: linear-gradient(
+            135deg,
+            #172b4d,
+            #203f6c
+        );
+
+        color: white;
+
+        padding: 18px 22px;
+
+        border-radius: 9px;
+
+        margin: 20px 0;
+
+        font-family: Consolas, monospace;
+
+        font-size: 17px;
+
+        line-height: 1.8;
+    }
+
+
+    /* =========================================
+       OPTIONS
+    ========================================== */
+
+    .option {
+        display: block;
+
+        padding: 17px 20px;
+
+        margin: 12px 0;
+
+        border: 1px solid #d5e3f2;
+
+        border-radius: 10px;
+
+        background: white;
+
+        cursor: pointer;
+
+        font-size: 17px;
+
+        transition: 0.2s;
+    }
+
+
+    .option:hover {
+        border-color: #1677ff;
+
+        background: #f1f7ff;
+    }
+
+
+    .option input {
+        margin-right: 14px;
+
+        transform: scale(1.25);
+
+        accent-color: #1677ff;
+    }
+
+
+    .option.selected {
+        border-color: #1677ff;
+
+        background: #eaf3ff;
+
+        box-shadow:
+            0 0 0 1px
+            rgba(22, 119, 255, 0.15);
+    }
+
+
+    /* =========================================
+       NAVIGATION BUTTONS
+    ========================================== */
+
+    .button-area {
+        display: flex;
+
+        justify-content: space-between;
+
+        margin-top: 18px;
+    }
+
+
+    button {
+        border: none;
+
+        cursor: pointer;
+
+        border-radius: 9px;
+
+        padding: 13px 27px;
+
+        font-size: 15px;
+
+        font-weight: bold;
+
+        transition: 0.2s;
+    }
+
+
+    .previous-btn {
+        background: white;
+
+        color: #1769c2;
+
+        border: 1px solid #9fc5ed;
+    }
+
+
+    .previous-btn:hover {
+        background: #eef6ff;
+    }
+
+
+    .next-btn {
+        background: linear-gradient(
+            135deg,
+            #1268df,
+            #1677ff
+        );
+
+        color: white;
+
+        min-width: 125px;
+
+        box-shadow:
+            0 4px 10px
+            rgba(22, 119, 255, 0.2);
+    }
+
+
+    .next-btn:hover {
+        background: linear-gradient(
+            135deg,
+            #075fd7,
+            #1268df
+        );
+    }
+
+
+    /* =========================================
+       RIGHT PANEL
+    ========================================== */
+
+    .right-panel {
+        width: 100%;
+    }
+
+
+    /* =========================================
+       CAMERA
+    ========================================== */
+
+    .camera-card {
+        padding: 20px;
+    }
+
+
+    .camera-title {
+        font-size: 20px;
+
+        font-weight: bold;
+
+        color: #123d78;
+
+        margin-bottom: 15px;
+    }
+
+
+    #camera {
+        width: 100%;
+
+        height: 230px;
+
+        object-fit: cover;
+
+        background: #111;
+
+        border-radius: 10px;
+
+        display: block;
+
+        border: 2px solid #d7e7f7;
+    }
+
+
+    /* =========================================
+       CAMERA STATUS
+    ========================================== */
+
+    .status-area {
+        display: flex;
+
+        justify-content: space-between;
+
+        gap: 10px;
+
+        margin-top: 13px;
+
+        padding: 10px 12px;
+
+        background: #f1f8ff;
+
+        border-radius: 8px;
+
+        font-size: 13px;
+    }
+
+
+    .green {
+        color: #16a765;
+        font-weight: bold;
+    }
+
+
+    .red {
+        color: #e63950;
+        font-weight: bold;
+    }
+
+
+    .orange {
+        color: #f59e0b;
+        font-weight: bold;
+    }
+
+
+    /* =========================================
+       QUESTION NAVIGATOR
+    ========================================== */
+
+    .navigator-card {
+        margin-top: 18px;
+
+        padding: 20px;
+    }
+
+
+    .navigator-title {
+        font-size: 20px;
+
+        font-weight: bold;
+
+        color: #123d78;
+
+        margin-bottom: 18px;
+    }
+
+
+    .question-buttons {
+        display: grid;
+
+        grid-template-columns:
+            repeat(5, 1fr);
+
+        gap: 9px;
+    }
+
+
+    .question-btn {
+        padding: 11px 4px;
+
+        background: #f5f8fc;
+
+        color: #24476d;
+
+        border: 1px solid #d4e2f1;
+
+        border-radius: 7px;
+
+        font-weight: bold;
+    }
+
+
+    .question-btn:hover {
+        border-color: #1677ff;
+
+        background: #eef6ff;
+    }
+
+
+    .question-btn.current {
+        background: #1677ff;
+
+        color: white;
+
+        border-color: #1677ff;
+    }
+
+
+    .question-btn.answered {
+        background: #16a765;
+
+        color: white;
+
+        border-color: #16a765;
+    }
+
+
+    /* =========================================
+       SUBMIT BUTTON
+    ========================================== */
+
+    .submit-btn {
+        width: 100%;
+
+        margin-top: 20px;
+
+        padding: 15px;
+
+        background: linear-gradient(
+            135deg,
+            #1268df,
+            #1677ff
+        );
+
+        color: white;
+
+        font-size: 16px;
+
+        border-radius: 8px;
+    }
+
+
+    .submit-btn:hover {
+        background: linear-gradient(
+            135deg,
+            #075fd7,
+            #1268df
+        );
+    }
+
+
+    /* =========================================
+       BROWSER ACTIVITY
+    ========================================== */
+
+    .browser-card {
+        margin-top: 18px;
+
+        padding: 18px 20px;
+    }
+
+
+    .browser-title {
+        font-size: 18px;
+
+        font-weight: bold;
+
+        color: #123d78;
+
+        margin-bottom: 13px;
+    }
+
+
+    .monitoring-dot {
+        width: 9px;
+
+        height: 9px;
+
+        display: inline-block;
+
+        border-radius: 50%;
+
+        background: #16a765;
+
+        margin-right: 7px;
+    }
+
+
+    #event-log {
+        font-size: 13px;
+
+        color: #53657d;
+
+        background: #f5f9fd;
+
+        border: 1px solid #dce8f4;
+
+        border-radius: 8px;
+
+        padding: 10px;
+    }
+
+
+    #canvas {
+        display: none;
+    }
+
+
+    /* =========================================
+       RESPONSIVE
+    ========================================== */
+
+    @media (max-width: 950px) {
 
         .exam-layout {
-            width: 100%;
-
-            display: grid;
-
-            grid-template-columns:
-                minmax(0, 1fr)
-                360px;
-
-            gap: 20px;
-
-            align-items: start;
+            grid-template-columns: 1fr;
         }
-
-
-        /* =========================================
-           CARD
-        ========================================= */
-
-        .card {
-            background: white;
-
-            border: 1px solid #dce7f5;
-
-            border-radius: 10px;
-
-            box-shadow:
-                0 3px 12px
-                rgba(20, 50, 90, 0.07);
-        }
-
-
-        /* =========================================
-           QUESTION HEADER
-        ========================================= */
-
-        .question-header {
-            padding: 20px 24px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 20px;
-        }
-
-
-        .question-number {
-            font-size: 26px;
-            font-weight: bold;
-        }
-
-
-        .progress-area {
-            display: flex;
-
-            align-items: center;
-
-            gap: 15px;
-
-            margin-top: 15px;
-        }
-
-
-        .progress-bar {
-            height: 10px;
-
-            background: #dfe8f5;
-
-            border-radius: 10px;
-
-            overflow: hidden;
-
-            width: 100%;
-        }
-
-
-        .progress {
-            height: 100%;
-
-            width: 6.66%;
-
-            background: #1677ff;
-
-            border-radius: 10px;
-
-            transition: 0.3s;
-        }
-
-
-        .progress-text {
-            color: #64748b;
-
-            font-weight: bold;
-
-            white-space: nowrap;
-        }
-
-
-        /* =========================================
-           TIMER
-        ========================================= */
-
-        .timer-box {
-            min-width: 140px;
-
-            padding: 12px 18px;
-
-            background: #fff0f3;
-
-            border: 1px solid #ffd3dc;
-
-            border-radius: 10px;
-
-            text-align: center;
-        }
-
-
-        .timer-title {
-            color: #ff4057;
-
-            font-size: 13px;
-
-            font-weight: bold;
-        }
-
-
-        #timer {
-            color: #ed2945;
-
-            font-size: 27px;
-
-            font-weight: bold;
-
-            margin-top: 5px;
-        }
-
-
-        /* =========================================
-           QUESTION AREA
-        ========================================= */
-
-        #questionsContainer {
-            margin-top: 18px;
-        }
-
-
-        .question-card {
-            display: none;
-
-            padding: 28px 24px;
-        }
-
-
-        .question-card.active {
-            display: block;
-        }
-
-
-        .question-card h2 {
-            margin-top: 0;
-
-            font-size: 22px;
-
-            line-height: 1.5;
-        }
-
-
-        /* =========================================
-           CODE
-        ========================================= */
-
-        .code-box {
-            background: #17243a;
-
-            color: white;
-
-            padding: 18px 22px;
-
-            border-radius: 8px;
-
-            margin: 20px 0;
-
-            font-family: Consolas, monospace;
-
-            font-size: 17px;
-
-            line-height: 1.8;
-        }
-
-
-        /* =========================================
-           OPTIONS
-        ========================================= */
-
-        .option {
-            display: block;
-
-            padding: 17px 20px;
-
-            margin: 12px 0;
-
-            border: 1px solid #d8e4f3;
-
-            border-radius: 9px;
-
-            background: white;
-
-            cursor: pointer;
-
-            font-size: 17px;
-
-            transition: 0.2s;
-        }
-
-
-        .option:hover {
-            border-color: #1677ff;
-
-            background: #f4f8ff;
-        }
-
-
-        .option input {
-            margin-right: 14px;
-
-            transform: scale(1.25);
-
-            accent-color: #1677ff;
-        }
-
-
-        .option.selected {
-            border-color: #1677ff;
-
-            background: #eef5ff;
-        }
-
-
-        /* =========================================
-           NAVIGATION BUTTONS
-        ========================================= */
-
-        .button-area {
-            display: flex;
-
-            justify-content: space-between;
-
-            margin-top: 18px;
-        }
-
-
-        button {
-            border: none;
-
-            cursor: pointer;
-
-            border-radius: 8px;
-
-            padding: 13px 25px;
-
-            font-size: 15px;
-
-            font-weight: bold;
-        }
-
-
-        .previous-btn {
-            background: white;
-
-            color: #60738f;
-
-            border: 1px solid #aebed5;
-        }
-
-
-        .previous-btn:hover {
-            background: #f1f5fa;
-        }
-
-
-        .next-btn {
-            background: #1677ff;
-
-            color: white;
-        }
-
-
-        .next-btn:hover {
-            background: #075fd7;
-        }
-
-
-        /* =========================================
-           RIGHT PANEL
-        ========================================= */
 
         .right-panel {
             width: 100%;
         }
 
-
-        /* =========================================
-           CAMERA
-        ========================================= */
-
-        .camera-card {
-            padding: 18px;
-        }
-
-
-        .camera-title {
-            font-size: 20px;
-
-            font-weight: bold;
-
-            margin-bottom: 15px;
-        }
-
-
-        #camera {
-            width: 100%;
-
-            height: 230px;
-
-            object-fit: cover;
-
-            background: #111;
-
-            border-radius: 9px;
-
-            display: block;
-        }
-
-
-        /* =========================================
-           CAMERA STATUS
-        ========================================= */
-
-        .status-area {
-            display: flex;
-
-            justify-content: space-between;
-
-            gap: 10px;
-
-            margin-top: 14px;
-
-            font-size: 13px;
-        }
-
-
-        .green {
-            color: #16a765;
-        }
-
-
-        .red {
-            color: #e63950;
-        }
-
-
-        .orange {
-            color: #f59e0b;
-        }
-
-
-        /* =========================================
-           QUESTION NAVIGATOR
-        ========================================= */
-
-        .navigator-card {
-            margin-top: 18px;
-
-            padding: 20px;
-        }
-
-
-        .navigator-title {
-            font-size: 20px;
-
-            font-weight: bold;
-
-            margin-bottom: 18px;
-        }
-
-
-        .question-buttons {
-            display: grid;
-
-            grid-template-columns:
-                repeat(5, 1fr);
-
-            gap: 9px;
-        }
-
-
-        .question-btn {
-            padding: 11px 4px;
-
-            background: #f4f7fb;
-
-            color: #172b4d;
-
-            border: 1px solid #d8e4f3;
-
-            border-radius: 7px;
-
-            font-weight: bold;
-        }
-
-
-        .question-btn:hover {
-            border-color: #1677ff;
-
-            background: #eef5ff;
-        }
-
-
-        .question-btn.current {
-            background: #1677ff;
-
-            color: white;
-
-            border-color: #1677ff;
-        }
-
-
-        .question-btn.answered {
-            background: #16a765;
-
-            color: white;
-
-            border-color: #16a765;
-        }
-
-
-        /* =========================================
-           SUBMIT BUTTON
-        ========================================= */
-
-        .submit-btn {
-            width: 100%;
-
-            margin-top: 20px;
-
-            padding: 15px;
-
-            background: #ff4658;
-
-            color: white;
-
-            font-size: 16px;
-
-            border-radius: 8px;
-        }
-
-
-        .submit-btn:hover {
-            background: #e63246;
-        }
-
-
-        /* =========================================
-           BROWSER ACTIVITY
-        ========================================= */
-
-        .browser-card {
-            margin-top: 18px;
-
-            padding: 16px 22px;
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 20px;
-        }
-
-
-        .browser-title {
-            font-size: 15px;
-
-            font-weight: bold;
-
-            white-space: nowrap;
-        }
-
-
-        .monitoring-dot {
-            width: 9px;
-
-            height: 9px;
-
-            display: inline-block;
-
-            border-radius: 50%;
-
-            background: #16a765;
-
-            margin-right: 7px;
-        }
-
-
-        #event-log {
-            font-size: 13px;
-
-            color: #53657d;
-        }
-
-
-        #canvas {
+        .candidate {
             display: none;
         }
 
-
-        /* =========================================
-           RESPONSIVE
-        ========================================= */
-
-        @media (max-width: 950px) {
-
-            .exam-layout {
-                grid-template-columns: 1fr;
-            }
+    }
 
 
-            .right-panel {
-                width: 100%;
-            }
+    @media (max-width: 600px) {
 
-
-            .candidate {
-                display: none;
-            }
-
+        .header {
+            padding: 15px 20px;
         }
 
-
-        @media (max-width: 600px) {
-
-            .header {
-                padding: 15px 20px;
-            }
-
-
-            .logo {
-                font-size: 25px;
-            }
-
-
-            .exam-title {
-                font-size: 18px;
-            }
-
-
-            .divider,
-            .exam-subtitle {
-                display: none;
-            }
-
-
-            .question-header {
-                flex-direction: column;
-
-                align-items: stretch;
-            }
-
-
-            .timer-box {
-                width: 100%;
-            }
-
-
-            .question-number {
-                font-size: 21px;
-            }
-
+        .logo {
+            font-size: 25px;
         }
 
-    </style>
+        .exam-title {
+            font-size: 18px;
+        }
+
+        .divider,
+        .exam-subtitle {
+            display: none;
+        }
+
+        .question-header {
+            flex-direction: column;
+
+            align-items: stretch;
+        }
+
+        .timer-box {
+            width: 100%;
+        }
+
+        .question-number {
+            font-size: 21px;
+        }
+
+    }
+
+</style>
+
 
 </head>
 

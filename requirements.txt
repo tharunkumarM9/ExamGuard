@@ -1,2 +1,4 @@
-python -m pip install flask
-python -m pip install opencv-python
+Flask>=3.0.0
+Werkzeug>=3.0.0
+opencv-python>=4.8.0
+numpy>=1.24.0

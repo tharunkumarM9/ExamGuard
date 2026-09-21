@@ -91,14 +91,18 @@ def register():
 
     if request.method == "POST":
 
-        name = request.form["name"]
-        email = request.form["email"]
-        password = request.form["password"]
+        # ----------------------------------------
+        # GET FORM DATA
+        # ----------------------------------------
 
+        name = request.form.get("name", "").strip()
+        email = request.form.get("email", "").strip()
+        password = request.form.get("password", "")
 
         # ----------------------------------------
         # VALIDATE REQUIRED FIELDS
         # ----------------------------------------
+
         if not name or not email or not password:
 
             return render_template(
@@ -106,37 +110,59 @@ def register():
                 error="Please fill in all required fields"
             )
 
-
         # ----------------------------------------
-        # GET CAPTURED PHOTO
+        # GET PHOTO FROM FORM
         # ----------------------------------------
-        photo_path = session.get("capture_photo")
 
+        photo = request.files.get("photo")
 
-        if not photo_path:
+        if not photo or photo.filename == "":
 
             return render_template(
                 "register.html",
                 error="Please capture your photo before registering"
             )
 
+        # ----------------------------------------
+        # READ PHOTO
+        # ----------------------------------------
+
+        image_data = photo.read()
+
+        if not image_data:
+
+            return render_template(
+                "register.html",
+                error="Photo could not be read"
+            )
+
+        # ----------------------------------------
+        # SAVE / PROCESS PHOTO
+        # ----------------------------------------
+
+        photo_path = capture_photo(image_data)
+
+        if not photo_path:
+
+            return render_template(
+                "register.html",
+                error="Could not process the captured photo"
+            )
 
         # ----------------------------------------
         # HASH PASSWORD
         # ----------------------------------------
-        hashed_password = generate_password_hash(
-            password
-        )
 
+        hashed_password = generate_password_hash(password)
 
         connection = get_db()
-
 
         try:
 
             # ----------------------------------------
             # INSERT CANDIDATE
             # ----------------------------------------
+
             connection.execute(
                 """
                 INSERT INTO candidates
@@ -156,53 +182,55 @@ def register():
                 )
             )
 
-
             connection.commit()
-
 
         except sqlite3.IntegrityError:
 
-            # ----------------------------------------
-            # DELETE PHOTO IF REGISTRATION FAILS
-            # ----------------------------------------
+            connection.rollback()
+
+            # Delete photo if registration failed
             if os.path.exists(photo_path):
 
                 os.remove(photo_path)
-
-
-            session.pop(
-                "capture_photo",
-                None
-            )
-
 
             return render_template(
                 "register.html",
                 error="Email already registered. Please use a different email."
             )
 
+        except Exception as e:
+
+            connection.rollback()
+
+            # Delete photo if another error occurs
+            if os.path.exists(photo_path):
+
+                os.remove(photo_path)
+
+            print("Registration error:", e)
+
+            return render_template(
+                "register.html",
+                error="Registration failed. Please try again."
+            )
 
         finally:
 
             connection.close()
 
-
         # ----------------------------------------
-        # REMOVE TEMPORARY PHOTO SESSION
+        # REGISTRATION SUCCESS
         # ----------------------------------------
-        session.pop(
-            "capture_photo",
-            None
-        )
 
+        return redirect(url_for("login"))
 
-        return redirect("/login")
-
+    # ----------------------------------------
+    # GET REQUEST
+    # ----------------------------------------
 
     return render_template(
         "register.html"
     )
-
 
 # ----------------------------------------
 # LOGIN
@@ -294,14 +322,13 @@ def login():
         # ----------------------------------------
         # VERIFY PASSWORD
         # ----------------------------------------
-        if candidate and check_password_hash(
-            candidate["password"],
-            password
-        ):
+        if candidate and check_password_hash(candidate["password"], password):
+             session["candidate_id"] = candidate["id"]
 
-            session["candidate_id"] = candidate["id"]
 
-            return redirect("/dashboard")
+             session["candidate_name"] = candidate["name"]
+
+             return redirect("/dashboard")
 
 
         return "Invalid email or password"

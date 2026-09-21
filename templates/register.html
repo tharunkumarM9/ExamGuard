@@ -1,652 +1,881 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>ExamGuard Registration</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ExamGuard | Candidate Registration</title>
+
 
     <style>
 
-* {
-    box-sizing: border-box;
-}
+    /* =========================
+       RESET
+    ========================= */
 
-
-/* =========================
-   BODY
-========================= */
-
-body {
-
-    font-family: "Segoe UI", Arial, sans-serif;
-
-    margin: 0;
-
-    padding: 35px;
-
-    min-height: 100vh;
-
-    background:
-        radial-gradient(
-            circle at 10% 10%,
-            #d8f3e3 0,
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 90% 90%,
-            #e3f6ea 0,
-            transparent 30%
-        ),
-        #f4fbf7;
-
-    color: #26332d;
-
-    overflow-x: hidden;
-}
-
-
-/* =========================
-   BACKGROUND DECORATION
-========================= */
-
-body::before,
-body::after {
-
-    content: "";
-
-    position: fixed;
-
-    border-radius: 50%;
-
-    z-index: -1;
-
-    opacity: 0.45;
-
-    animation: float 7s ease-in-out infinite;
-}
-
-
-body::before {
-
-    width: 300px;
-    height: 300px;
-
-    background: #a8ddbd;
-
-    top: -130px;
-    left: -100px;
-}
-
-
-body::after {
-
-    width: 350px;
-    height: 350px;
-
-    background: #bfe8ce;
-
-    bottom: -170px;
-    right: -120px;
-
-    animation-delay: 2s;
-}
-
-
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0);
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
     }
 
-    50% {
-        transform: translateY(20px);
-    }
-}
 
-
-/* =========================
-   FORM CONTAINER
-========================= */
-
-.form-container {
-
-    width: 100%;
-
-    max-width: 1050px;
-
-    margin: auto;
-
-    padding: 35px 40px;
-
-    background: rgba(255, 255, 255, 0.97);
-
-    border-radius: 22px;
-
-    border: 1px solid rgba(197, 222, 208, 0.9);
-
-    box-shadow:
-        0 25px 60px rgba(22, 138, 87, 0.13),
-        0 5px 15px rgba(38, 51, 45, 0.05);
-
-    backdrop-filter: blur(10px);
-
-    animation: cardAppear 0.7s ease;
-}
-
-
-@keyframes cardAppear {
-
-    from {
-
-        opacity: 0;
-
-        transform: translateY(25px);
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform: translateY(0);
-    }
-}
-
-
-/* =========================
-   MAIN HEADING
-========================= */
-
-h2 {
-
-    margin: 0 0 30px 0;
-
-    padding: 0 0 18px 15px;
-
-    font-size: 30px;
-
-    color: #126b45;
-
-    border-bottom: 2px solid #dcefe4;
-
-    position: relative;
-}
-
-
-/* Green highlight */
-
-h2::before {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-
-    top: 2px;
-
-    width: 5px;
-
-    height: 32px;
-
-    border-radius: 5px;
-
-    background:
-        linear-gradient(
-            #168a57,
-            #0f7046
-        );
-}
-
-
-/* =========================
-   LABEL
-========================= */
-
-label {
-
-    display: block;
-
-    margin-top: 18px;
-
-    margin-bottom: 7px;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    color: #174d36;
-}
-
-
-/* =========================
-   INPUT
-========================= */
-
-input {
-
-    width: 100%;
-
-    height: 52px;
-
-    padding: 12px 16px;
-
-    margin-top: 0;
-
-    font-family: inherit;
-
-    font-size: 15px;
-
-    color: #26332d;
-
-    background: #fbfefc;
-
-    border: 1.5px solid #c5ded0;
-
-    border-radius: 11px;
-
-    outline: none;
-
-    transition: all 0.25s ease;
-}
-
-
-input:hover {
-
-    border-color: #80b99a;
-
-    background: #ffffff;
-}
-
-
-input:focus {
-
-    border-color: #168a57;
-
-    background: #ffffff;
-
-    box-shadow:
-        0 0 0 4px rgba(22, 138, 87, 0.12);
-}
-
-
-input::placeholder {
-
-    color: #9aaa9f;
-}
-
-
-/* =========================
-   SECTION HEADING
-========================= */
-
-h3 {
-
-    margin-top: 28px;
-
-    margin-bottom: 12px;
-
-    padding: 13px 18px;
-
-    font-size: 20px;
-
-    color: #174d36;
-
-    background:
-        linear-gradient(
-            90deg,
-            #eaf7ef,
-            #f2faf5
-        );
-
-    border-left: 5px solid #168a57;
-
-    border-radius: 8px;
-}
-
-
-/* =========================
-   CAMERA
-========================= */
-
-video {
-
-    width: 100%;
-
-    max-width: 650px;
-
-    height: 300px;
-
-    display: block;
-
-    margin-top: 12px;
-
-    background: #33483d;
-
-    border: 4px solid #c5ded0;
-
-    border-radius: 14px;
-
-    object-fit: cover;
-
-    box-shadow:
-        0 8px 22px rgba(38, 80, 55, 0.16);
-}
-
-
-/* =========================
-   BUTTONS
-========================= */
-
-button {
-
-    padding: 13px 22px;
-
-    margin: 14px 8px 10px 0;
-
-    border-radius: 10px;
-
-    border: none;
-
-    font-family: inherit;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition: all 0.25s ease;
-}
-
-
-/* =========================
-   START CAMERA
-========================= */
-
-#startCamera {
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #168a57,
-            #0f7046
-        );
-
-    box-shadow:
-        0 5px 14px rgba(22, 138, 87, 0.22);
-}
-
-
-#startCamera:hover {
-
-    transform: translateY(-2px);
-
-    background:
-        linear-gradient(
-            135deg,
-            #0f7046,
-            #095a38
-        );
-
-    box-shadow:
-        0 9px 20px rgba(22, 138, 87, 0.28);
-}
-
-
-/* =========================
-   CAPTURE PHOTO
-========================= */
-
-#capturePhoto {
-
-    color: #126b45;
-
-    background: #ffffff;
-
-    border: 1px solid #b8d8c6;
-}
-
-
-#capturePhoto:hover:not(:disabled) {
-
-    background: #eaf7ef;
-
-    border-color: #63aa82;
-
-    transform: translateY(-2px);
-}
-
-
-/* =========================
-   DISABLED
-========================= */
-
-button:disabled {
-
-    opacity: 0.45;
-
-    cursor: not-allowed;
-}
-
-
-/* =========================
-   PHOTO PREVIEW
-========================= */
-
-#preview {
-
-    width: 180px;
-
-    height: 180px;
-
-    margin-top: 15px;
-
-    display: none;
-
-    object-fit: cover;
-
-    border: 4px solid #168a57;
-
-    border-radius: 12px;
-
-    background: white;
-
-    box-shadow:
-        0 7px 18px rgba(22, 138, 87, 0.18);
-}
-
-
-/* =========================
-   CANVAS
-========================= */
-
-#canvas {
-
-    display: none;
-}
-
-
-/* =========================
-   PHOTO STATUS
-========================= */
-
-#photoStatus {
-
-    display: inline-block;
-
-    margin-top: 10px;
-
-    padding: 9px 14px;
-
-    border-radius: 8px;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    color: #39775b;
-
-    background: #eaf7ef;
-
-    border-left: 4px solid #168a57;
-}
-
-
-/* =========================
-   REGISTER BUTTON
-========================= */
-
-#registerButton {
-
-    width: 100%;
-
-    margin-top: 25px;
-
-    padding: 16px;
-
-    border-radius: 11px;
-
-    border: none;
-
-    color: white;
-
-    font-family: inherit;
-
-    font-size: 17px;
-
-    font-weight: 700;
-
-    letter-spacing: 0.8px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #168a57,
-            #0f7046
-        );
-
-    box-shadow:
-        0 8px 20px
-        rgba(22, 138, 87, 0.24);
-
-}
-
-
-#registerButton:hover:not(:disabled) {
-
-    transform: translateY(-2px);
-
-    background:
-        linear-gradient(
-            135deg,
-            #0f7046,
-            #095a38
-        );
-
-    box-shadow:
-        0 12px 25px
-        rgba(22, 138, 87, 0.32);
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 700px) {
+    /* =========================
+       BODY
+    ========================= */
 
     body {
+        min-height: 100vh;
+        padding: 35px;
 
-        padding: 15px;
+        font-family: "Segoe UI", Arial, sans-serif;
 
+        background:
+            radial-gradient(
+                circle at 10% 10%,
+                #dcecff 0,
+                transparent 28%
+            ),
+
+            radial-gradient(
+                circle at 90% 90%,
+                #e6f2ff 0,
+                transparent 30%
+            ),
+
+            #f4f8ff;
+
+        color: #26384d;
     }
 
 
-    .form-container {
+    /* =========================
+       MAIN CARD
+    ========================= */
 
-        padding: 25px 20px;
+    form {
+        width: 100%;
+        max-width: 1100px;
 
-        border-radius: 18px;
+        margin: auto;
+        padding: 35px 45px 40px;
 
+        background: rgba(255, 255, 255, 0.98);
+
+        border: 1px solid #d5e3f3;
+
+        border-radius: 22px;
+
+        box-shadow:
+            0 20px 50px rgba(25, 88, 150, 0.13),
+            0 5px 15px rgba(0, 0, 0, 0.04);
     }
 
 
-    h2 {
+    /* =========================
+       HEADING
+    ========================= */
 
-        font-size: 25px;
+    h1 {
+        max-width: 1100px;
 
+        margin: 0 auto 28px;
+
+        padding-left: 17px;
+        padding-bottom: 17px;
+
+        font-size: 30px;
+        font-weight: 700;
+
+        color: #1559a6;
+
+        border-bottom: 2px solid #e0ebf8;
+
+        position: relative;
     }
 
+
+    h1::before {
+        content: "";
+
+        position: absolute;
+
+        left: 0;
+        top: 0;
+
+        width: 5px;
+        height: 35px;
+
+        border-radius: 5px;
+
+        background:
+            linear-gradient(
+                180deg,
+                #1976d2,
+                #0d47a1
+            );
+    }
+
+
+    /* =========================
+       LABELS
+    ========================= */
+
+    label {
+        display: block;
+
+        margin-top: 18px;
+        margin-bottom: 7px;
+
+        font-size: 14px;
+        font-weight: 700;
+
+        color: #285785;
+    }
+
+
+    /* =========================
+       INPUTS
+    ========================= */
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+
+        width: 100%;
+        height: 52px;
+
+        padding: 12px 16px;
+
+        font-family: inherit;
+        font-size: 15px;
+
+        color: #26384d;
+
+        background: #fbfdff;
+
+        border: 1.5px solid #c7d9ec;
+
+        border-radius: 11px;
+
+        outline: none;
+
+        transition: all 0.25s ease;
+    }
+
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+
+        border-color: #1976d2;
+
+        background: white;
+
+        box-shadow:
+            0 0 0 4px rgba(25, 118, 210, 0.12);
+    }
+
+
+    /* =========================
+       CAMERA SECTION
+    ========================= */
+
+    .photo-section {
+
+        margin-top: 28px;
+
+        padding: 20px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #eef6ff,
+                #f8fbff
+            );
+
+        border: 1px solid #d4e4f5;
+
+        border-radius: 14px;
+    }
+
+
+    /* =========================
+       PHOTO TITLE
+    ========================= */
+
+    .photo-title {
+
+        margin-bottom: 14px;
+
+        padding: 12px 16px;
+
+        font-size: 19px;
+        font-weight: 700;
+
+        color: #1559a6;
+
+        background: #e6f1ff;
+
+        border-left: 5px solid #1976d2;
+
+        border-radius: 8px;
+    }
+
+
+    /* =========================
+       CAMERA
+    ========================= */
 
     video {
 
-        height: 240px;
+        width: 100%;
+        max-width: 650px;
+        height: 300px;
 
+        display: block;
+
+        margin: 0 auto 15px;
+
+        background: #26384d;
+
+        border: 4px solid #b9d2ec;
+
+        border-radius: 14px;
+
+        object-fit: cover;
+
+        box-shadow:
+            0 8px 22px rgba(31, 91, 145, 0.18);
+    }
+
+
+    /* =========================
+       PHOTO PREVIEW
+    ========================= */
+
+    #preview {
+
+        width: 180px;
+        height: 180px;
+
+        display: none;
+
+        margin: 15px auto;
+
+        object-fit: cover;
+
+        border: 4px solid #1976d2;
+
+        border-radius: 14px;
+
+        background: white;
+
+        box-shadow:
+            0 8px 20px rgba(25, 118, 210, 0.18);
+    }
+
+
+    /* =========================
+       CAMERA BUTTONS
+    ========================= */
+
+    .camera-buttons {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        flex-wrap: wrap;
     }
 
 
     button {
 
-        width: 100%;
+        padding: 12px 22px;
 
-        margin-right: 0;
+        border-radius: 9px;
+
+        border: none;
+
+        font-family: inherit;
+
+        font-size: 14px;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        transition: all 0.25s ease;
+    }
+
+
+    /* =========================
+       START CAMERA
+    ========================= */
+
+    #startCamera {
+
+        color: white;
+
+        background:
+            linear-gradient(
+                135deg,
+                #1976d2,
+                #0d47a1
+            );
+
+        box-shadow:
+            0 5px 14px rgba(25, 118, 210, 0.22);
+    }
+
+
+    #startCamera:hover {
+
+        transform: translateY(-2px);
+
+        background:
+            linear-gradient(
+                135deg,
+                #1565c0,
+                #0b3d91
+            );
+    }
+
+
+    /* =========================
+       CAPTURE PHOTO
+    ========================= */
+
+    #capturePhoto {
+
+        color: #1559a6;
+
+        background: white;
+
+        border: 1px solid #a9c6e5;
+    }
+
+
+    #capturePhoto:hover:not(:disabled) {
+
+        background: #eaf4ff;
+
+        border-color: #1976d2;
+
+        transform: translateY(-2px);
+    }
+
+
+    /* =========================
+       DISABLED
+    ========================= */
+
+    button:disabled {
+
+        opacity: 0.45;
+
+        cursor: not-allowed;
+    }
+
+
+    /* =========================
+       PHOTO STATUS
+    ========================= */
+
+    #photoStatus {
+
+        display: inline-block;
+
+        margin-top: 10px;
+
+        padding: 8px 13px;
+
+        font-size: 13px;
+
+        font-weight: 600;
+
+        color: #25629a;
+
+        background: #e6f1ff;
+
+        border-left: 4px solid #1976d2;
+
+        border-radius: 7px;
+    }
+
+
+    /* =========================
+       HIDDEN CANVAS
+    ========================= */
+
+    #canvas {
+        display: none;
+    }
+
+
+    /* =========================
+       REGISTER BUTTON
+    ========================= */
+
+    #registerButton {
+
+        width: 100%;
+        height: 55px;
+
+        margin-top: 28px;
+
+        color: white;
+
+        background:
+            linear-gradient(
+                135deg,
+                #1976d2,
+                #0d47a1
+            );
+
+        border: none;
+
+        border-radius: 11px;
+
+        font-size: 17px;
+        font-weight: 700;
+
+        letter-spacing: 0.5px;
+
+        box-shadow:
+            0 8px 20px rgba(25, 118, 210, 0.25);
+    }
+
+
+    #registerButton:hover {
+
+        transform: translateY(-2px);
+
+        background:
+            linear-gradient(
+                135deg,
+                #1565c0,
+                #0b3d91
+            );
+
+        box-shadow:
+            0 12px 25px rgba(25, 118, 210, 0.32);
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+        body {
+            padding: 15px;
+        }
+
+
+        form {
+            padding: 25px 20px 30px;
+
+            border-radius: 18px;
+        }
+
+
+        h1 {
+            font-size: 25px;
+        }
+
+
+        video {
+            height: 240px;
+        }
+
+
+        .camera-buttons {
+
+            flex-direction: column;
+
+            align-items: stretch;
+        }
+
+
+        .camera-buttons button {
+            width: 100%;
+        }
 
     }
 
-}
-
 </style>
-    
 
 </head>
 
+
 <body>
+
+
+    <!-- =========================
+         PAGE HEADING
+    ========================== -->
 
     <h1>Candidate Registration</h1>
 
-    <form method="POST" enctype="multipart/form-data">
 
-        <label>Name</label>
+    <!-- =========================
+         REGISTRATION FORM
+    ========================== -->
 
-        <input 
-            type="text" 
+    <form method="POST"
+          enctype="multipart/form-data"
+          id="registrationForm">
+
+
+        <!-- NAME -->
+
+        <label for="name">
+            Name
+        </label>
+
+        <input
+            type="text"
+            id="name"
             name="name"
+            placeholder="Enter your full name"
+            required
         >
 
-        <br><br>
 
-        <label>Email</label>
+        <!-- EMAIL -->
 
-        <input 
-            type="email" 
+        <label for="email">
+            Email
+        </label>
+
+        <input
+            type="email"
+            id="email"
             name="email"
+            placeholder="Enter your email address"
+            required
         >
 
-        <br><br>
 
-        <label>Password</label>
+        <!-- PASSWORD -->
 
+        <label for="password">
+            Password
+        </label>
 
-        <input 
-            type="password" 
+        <input
+            type="password"
+            id="password"
             name="password"
+            placeholder="Create your password"
+            required
         >
 
-        <br><br>
-        <label>Photo</label>
 
-        <input type="file" name="photo" accept="image/*" required>
-        <br><br>
+        <!-- =========================
+             PHOTO SECTION
+        ========================== -->
 
-        
+        <div class="photo-section">
 
-        <button type="submit">
+
+            <div class="photo-title">
+                Candidate Photo
+            </div>
+
+
+            <!-- CAMERA -->
+
+            <video
+                id="video"
+                autoplay
+                playsinline>
+            </video>
+
+
+            <!-- PHOTO PREVIEW -->
+
+            <img
+                id="preview"
+                alt="Candidate Photo Preview"
+            >
+
+
+            <!-- HIDDEN CANVAS -->
+
+            <canvas id="canvas"></canvas>
+
+
+            <!-- BUTTONS -->
+
+            <div class="camera-buttons">
+
+                <button
+                    type="button"
+                    id="startCamera">
+                    Start Camera
+                </button>
+
+
+                <button
+                    type="button"
+                    id="capturePhoto"
+                    disabled>
+                    Capture Photo
+                </button>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div id="photoStatus">
+                Camera not started
+            </div>
+
+
+            <!-- HIDDEN FILE -->
+
+            <input
+                type="file"
+                id="photo"
+                name="photo"
+                accept="image/*"
+                required
+                hidden
+            >
+
+        </div>
+
+
+        <!-- =========================
+             REGISTER
+        ========================== -->
+
+        <button
+            type="submit"
+            id="registerButton">
+
             Register
+
         </button>
 
+
     </form>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        const video =
+            document.getElementById("video");
+
+        const canvas =
+            document.getElementById("canvas");
+
+        const preview =
+            document.getElementById("preview");
+
+        const startCamera =
+            document.getElementById("startCamera");
+
+        const capturePhoto =
+            document.getElementById("capturePhoto");
+
+        const photoStatus =
+            document.getElementById("photoStatus");
+
+        const photoInput =
+            document.getElementById("photo");
+
+
+        let stream = null;
+
+
+        /* =========================
+           START CAMERA
+        ========================== */
+
+        startCamera.addEventListener(
+            "click",
+            async function () {
+
+                try {
+
+                    stream =
+                        await navigator.mediaDevices
+                        .getUserMedia({
+                            video: true,
+                            audio: false
+                        });
+
+
+                    video.srcObject = stream;
+
+                    capturePhoto.disabled = false;
+
+                    photoStatus.textContent =
+                        "Camera started. Position your face and capture the photo.";
+
+                    photoStatus.style.color =
+                        "#28704e";
+
+                }
+
+                catch (error) {
+
+                    console.error(error);
+
+                    photoStatus.textContent =
+                        "Camera access denied or unavailable.";
+
+                    photoStatus.style.color =
+                        "#b33a3a";
+                }
+
+            }
+        );
+
+
+        /* =========================
+           CAPTURE PHOTO
+        ========================== */
+
+        capturePhoto.addEventListener(
+            "click",
+            function () {
+
+                if (!stream) {
+                    return;
+                }
+
+
+                canvas.width =
+                    video.videoWidth;
+
+                canvas.height =
+                    video.videoHeight;
+
+
+                const context =
+                    canvas.getContext("2d");
+
+
+                context.drawImage(
+                    video,
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                );
+
+
+                /* Convert canvas to image */
+
+                canvas.toBlob(
+                    function (blob) {
+
+                        const file =
+                            new File(
+                                [blob],
+                                "candidate_photo.jpg",
+                                {
+                                    type: "image/jpeg"
+                                }
+                            );
+
+
+                        const dataTransfer =
+                            new DataTransfer();
+
+
+                        dataTransfer.items.add(file);
+
+
+                        photoInput.files =
+                            dataTransfer.files;
+
+
+                        /* Preview */
+
+                        const imageURL =
+                            URL.createObjectURL(blob);
+
+                        preview.src =
+                            imageURL;
+
+                        preview.style.display =
+                            "block";
+
+
+                        /* Status */
+
+                        photoStatus.textContent =
+                            "Photo captured successfully.";
+
+                        photoStatus.style.color =
+                            "#28704e";
+
+
+                        /* Stop camera */
+
+                        stream.getTracks().forEach(
+                            function (track) {
+                                track.stop();
+                            }
+                        );
+
+                        video.srcObject = null;
+
+                        capturePhoto.disabled = true;
+
+                    },
+                    "image/jpeg",
+                    0.90
+                );
+
+            }
+        );
+
+
+        /* =========================
+           FORM VALIDATION
+        ========================== */
+
+        document
+        .getElementById("registrationForm")
+        .addEventListener(
+            "submit",
+            function (event) {
+
+                if (!photoInput.files.length) {
+
+                    event.preventDefault();
+
+                    photoStatus.textContent =
+                        "Please capture your photo before registering.";
+
+                    photoStatus.style.color =
+                        "#b33a3a";
+
+                    return;
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
 
