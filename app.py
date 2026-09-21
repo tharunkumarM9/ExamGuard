@@ -95,7 +95,7 @@ def captureCandidatePhoto():
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
-#     if request.method == "POST":
+    if request.method == "POST":
 
         # ----------------------------------------
         # GET FORM DATA
@@ -117,42 +117,16 @@ def register():
             )
 
         # ----------------------------------------
-        # GET PHOTO FROM FORM
+        # GET CAPTURED PHOTO
         # ----------------------------------------
 
-        photo = request.files.get("photo")
-
-        if not photo or photo.filename == "":
-
-            return render_template(
-                "register.html",
-                error="Please capture your photo before registering"
-            )
-
-        # ----------------------------------------
-        # READ PHOTO
-        # ----------------------------------------
-
-        image_data = photo.read()
-
-        if not image_data:
-
-            return render_template(
-                "register.html",
-                error="Photo could not be read"
-            )
-
-        # ----------------------------------------
-        # SAVE / PROCESS PHOTO
-        # ----------------------------------------
-
-        photo_path = capture_photo(image_data)
+        photo_path = session.get("capture_photo")
 
         if not photo_path:
 
             return render_template(
                 "register.html",
-                error="Could not process the captured photo"
+                error="Please capture a photo before registering."
             )
 
         # ----------------------------------------
@@ -161,34 +135,15 @@ def register():
 
         hashed_password = generate_password_hash(password)
 
-    # return render_template("register.html")
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        username = request.form.get('name', '').strip()
-        email = request.form.get('email', '').strip()
-        password = request.form.get('password', '').strip()
-       # photo = request.files.get('candidate_photo')
+        # ----------------------------------------
+        # DATABASE CONNECTION
+        # ----------------------------------------
 
-        if not username or not email or not password:
-            return render_template('register.html', error="Please fill in all required fields.")
-        photo_path = session.get("capture_photo")
-        if not photo_path:
-            return render_template('register.html', error="Please capture a photo before registering.")
-    try:    
         connection = get_db()
-        print("candidate email:", email)
-
-        
-    
-        
-        # Check if email is already registered
-        # connection.execute("SELECT id FROM candidates WHERE email = ?", (email,))
-        # if connection.fetchone():
-        #     connection.close()
-        #     return render_template('register.html', error="An account with this email already exists.")
 
         try:
+
+            print("Candidate email:", email)
 
             # ----------------------------------------
             # INSERT CANDIDATE
@@ -219,9 +174,7 @@ def register():
 
             connection.rollback()
 
-            # Delete photo if registration failed
-            if os.path.exists(photo_path):
-
+            if photo_path and os.path.exists(photo_path):
                 os.remove(photo_path)
 
             return render_template(
@@ -233,9 +186,7 @@ def register():
 
             connection.rollback()
 
-            # Delete photo if another error occurs
-            if os.path.exists(photo_path):
-
+            if photo_path and os.path.exists(photo_path):
                 os.remove(photo_path)
 
             print("Registration error:", e)
@@ -253,15 +204,16 @@ def register():
         # REGISTRATION SUCCESS
         # ----------------------------------------
 
+        session.pop("capture_photo", None)
+
         return redirect(url_for("login"))
 
     # ----------------------------------------
     # GET REQUEST
     # ----------------------------------------
 
-    return render_template(
-        "register.html"
-    )
+    return render_template("register.html")
+
 
 # ----------------------------------------
 # LOGIN
