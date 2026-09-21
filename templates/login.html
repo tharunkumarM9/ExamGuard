@@ -9,6 +9,9 @@
 
     <style>
 
+        /* =========================
+           RESET
+        ========================== */
 
         * {
             box-sizing: border-box;
@@ -16,6 +19,10 @@
             padding: 0;
         }
 
+
+        /* =========================
+           BODY
+        ========================== */
 
         body {
             min-height: 100vh;
@@ -28,58 +35,86 @@
             justify-content: center;
             align-items: center;
 
-            overflow-x: hidden;
+            overflow: hidden;
+
+            position: relative;
 
             background:
                 radial-gradient(
-                    circle at 10% 10%,
-                    #d8eee2 0,
+                    circle at 5% 5%,
+                    #c9f0dc 0,
+                    #c9f0dc 14%,
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 100% 30%,
+                    #d8f5e6 0,
+                    #d8f5e6 12%,
                     transparent 28%
                 ),
                 radial-gradient(
-                    circle at 90% 90%,
-                    #dcefe5 0,
+                    circle at 0% 90%,
+                    #bdebd3 0,
+                    #bdebd3 14%,
                     transparent 30%
                 ),
-                #f2f0e8;
+                radial-gradient(
+                    circle at 100% 90%,
+                    #c4efd8 0,
+                    #c4efd8 16%,
+                    transparent 32%
+                ),
+                #eefaf3;
         }
 
 
-        body::before,
-        body::after {
+        /* =========================
+           BACKGROUND CIRCLES
+        ========================== */
+
+        body::before {
             content: "";
 
             position: fixed;
 
+            width: 300px;
+            height: 300px;
+
+            top: -130px;
+            left: -100px;
+
             border-radius: 50%;
 
-            z-index: -1;
+            background: #bce8d0;
 
-            opacity: 0.45;
+            opacity: 0.65;
+
+            z-index: 0;
 
             animation: float 7s ease-in-out infinite;
         }
 
 
-        body::before {
-            width: 300px;
-            height: 300px;
-
-            background: #b9dcc9;
-
-            top: -130px;
-            left: -100px;
-        }
-
-
         body::after {
+            content: "";
+
+            position: fixed;
+
             width: 350px;
             height: 350px;
 
-            background: #c9e5d5;
-
             bottom: -170px;
             right: -120px;
+
+            border-radius: 50%;
+
+            background: #b8e7ce;
+
+            opacity: 0.7;
+
+            z-index: 0;
+
+            animation: float 7s ease-in-out infinite;
 
             animation-delay: 2s;
         }
@@ -97,8 +132,122 @@
             }
         }
 
+
+        /* =========================
+           LEAF BACKGROUND
+        ========================== */
+
+        .leaf-decoration {
+            position: fixed;
+
+            bottom: -20px;
+
+            z-index: 1;
+
+            pointer-events: none;
+        }
+
+
+        .leaf-decoration span {
+            position: absolute;
+
+            width: 55px;
+            height: 150px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #75cda0,
+                    #39a875
+                );
+
+            border-radius: 100% 0 100% 0;
+
+            opacity: 0.55;
+
+            transform-origin: bottom center;
+        }
+
+
+        /* LEFT LEAVES */
+
+        .left-leaves {
+            left: 20px;
+
+            bottom: -20px;
+
+            width: 180px;
+            height: 250px;
+        }
+
+
+        .left-leaves span:nth-child(1) {
+            left: 10px;
+            bottom: 0;
+
+            transform: rotate(-30deg);
+        }
+
+
+        .left-leaves span:nth-child(2) {
+            left: 60px;
+            bottom: 5px;
+
+            transform: rotate(0deg);
+        }
+
+
+        .left-leaves span:nth-child(3) {
+            left: 105px;
+            bottom: 0;
+
+            transform: rotate(30deg);
+        }
+
+
+        /* RIGHT LEAVES */
+
+        .right-leaves {
+            right: 20px;
+
+            bottom: -20px;
+
+            width: 220px;
+            height: 270px;
+        }
+
+
+        .right-leaves span:nth-child(1) {
+            right: 110px;
+            bottom: 0;
+
+            transform: rotate(-35deg);
+        }
+
+
+        .right-leaves span:nth-child(2) {
+            right: 60px;
+            bottom: 5px;
+
+            transform: rotate(0deg);
+        }
+
+
+        .right-leaves span:nth-child(3) {
+            right: 10px;
+            bottom: 0;
+
+            transform: rotate(35deg);
+        }
+
+
+        /* =========================
+           MAIN PAGE
+        ========================== */
+
         .page {
             width: 100%;
+
             max-width: 480px;
 
             padding: 25px;
@@ -106,9 +255,20 @@
             margin: 0 auto;
 
             display: flex;
+
             flex-direction: column;
+
             align-items: stretch;
+
+            position: relative;
+
+            z-index: 5;
         }
+
+
+        /* =========================
+           HEADING
+        ========================== */
 
         .heading {
             width: 100%;
@@ -122,7 +282,7 @@
         .heading h1 {
             margin: 0;
 
-            color: #214d3b;
+            color: #126b45;
 
             font-size: 34px;
 
@@ -135,19 +295,22 @@
         .heading p {
             margin: 8px 0 0;
 
-            color: #718077;
+            color: #66786e;
 
             font-size: 14px;
         }
 
 
-        /* Decorative line */
+        /* =========================
+           DECORATIVE LINE
+        ========================== */
 
         .leaf {
             width: 55px;
+
             height: 4px;
 
-            background: #b8dcca;
+            background: #a8d9ba;
 
             margin: 15px auto 0;
 
@@ -162,20 +325,25 @@
 
             position: absolute;
 
-            color: #4f9a77;
+            color: #168a57;
 
             font-size: 16px;
 
             left: 19px;
+
             top: -11px;
 
-            background: #f2f0e8;
+            background: #eefaf3;
 
             padding: 0 5px;
 
             transform: rotate(45deg);
         }
 
+
+        /* =========================
+           LOGIN CARD
+        ========================== */
 
         .login-card {
             width: 100%;
@@ -184,17 +352,21 @@
 
             padding: 40px;
 
-            background: rgba(255, 255, 255, 0.96);
+            background: rgba(255, 255, 255, 0.97);
 
-            border: 1px solid rgba(217, 221, 213, 0.9);
+            border: 1px solid rgba(197, 222, 208, 0.9);
 
             border-radius: 22px;
 
             box-shadow:
-                0 25px 60px rgba(38, 51, 45, 0.13),
+                0 25px 60px rgba(22, 138, 87, 0.13),
                 0 5px 15px rgba(38, 51, 45, 0.05);
 
             backdrop-filter: blur(10px);
+
+            position: relative;
+
+            z-index: 10;
 
             animation: cardAppear 0.7s ease;
         }
@@ -204,22 +376,24 @@
 
             from {
                 opacity: 0;
-
                 transform: translateY(25px);
             }
 
             to {
                 opacity: 1;
-
                 transform: translateY(0);
             }
         }
 
 
+        /* =========================
+           BRAND
+        ========================== */
+
         .brand-title {
             text-align: center;
 
-            color: #34483d;
+            color: #174d36;
 
             font-size: 18px;
 
@@ -233,16 +407,18 @@
             display: inline-flex;
 
             width: 48px;
+
             height: 48px;
 
             justify-content: center;
+
             align-items: center;
 
             border-radius: 50%;
 
-            background: #e2f1e8;
+            background: #ddf4e6;
 
-            color: #39775b;
+            color: #168a57;
 
             font-size: 22px;
 
@@ -264,7 +440,7 @@
         label {
             display: block;
 
-            color: #34483d;
+            color: #174d36;
 
             font-weight: 700;
 
@@ -285,19 +461,23 @@
         }
 
 
+        /* =========================
+           INPUT ICON
+        ========================== */
         /* Input icons */
 
         .input-icon {
             position: absolute;
 
             left: 15px;
+
             top: 50%;
 
             transform: translateY(-50%);
 
             font-size: 17px;
 
-            color: #668274;
+            color: #4f8a6d;
 
             pointer-events: none;
 
@@ -305,6 +485,9 @@
         }
 
 
+        /* =========================
+           INPUT
+        ========================== */
 
         input {
             display: block;
@@ -315,7 +498,7 @@
 
             padding: 0 45px 0 45px;
 
-            border: 1.5px solid #cbd5ce;
+            border: 1.5px solid #c5ded0;
 
             border-radius: 11px;
 
@@ -327,52 +510,54 @@
 
             color: #26332d;
 
-            background: #fbfcfb;
+            background: #fbfefc;
 
             transition: all 0.25s ease;
         }
 
 
         input::placeholder {
-            color: #a0aaa5;
+            color: #9aaa9f;
         }
 
 
         input:hover {
-            border-color: #91aa9b;
+            border-color: #80b99a;
         }
 
 
         input:focus {
-            border-color: #4f8067;
+            border-color: #168a57;
 
             background: #ffffff;
 
             box-shadow:
-                0 0 0 4px rgba(79, 128, 103, 0.12);
+                0 0 0 4px rgba(22, 138, 87, 0.12);
         }
 
 
         /* =========================
-           SHOW PASSWORD BUTTON
+           SHOW PASSWORD
         ========================== */
 
         .show-password {
             position: absolute;
 
             right: 12px;
+
             top: 50%;
 
             transform: translateY(-50%);
 
             width: 35px;
+
             height: 35px;
 
             border: none;
 
             background: transparent;
 
-            color: #70857a;
+            color: #668575;
 
             cursor: pointer;
 
@@ -385,9 +570,9 @@
 
 
         .show-password:hover {
-            background: #edf6f0;
+            background: #eaf7ef;
 
-            color: #3f5548;
+            color: #126b45;
         }
 
 
@@ -409,8 +594,8 @@
             background:
                 linear-gradient(
                     135deg,
-                    #5c7768,
-                    #3f5f4f
+                    #168a57,
+                    #0f7046
                 );
 
             color: white;
@@ -426,7 +611,7 @@
             margin-top: 4px;
 
             box-shadow:
-                0 8px 18px rgba(63, 95, 79, 0.22);
+                0 8px 18px rgba(22, 138, 87, 0.22);
 
             transition: all 0.25s ease;
         }
@@ -438,12 +623,12 @@
             background:
                 linear-gradient(
                     135deg,
-                    #4f6d5d,
-                    #344f41
+                    #0f7046,
+                    #095a38
                 );
 
             box-shadow:
-                0 12px 25px rgba(63, 95, 79, 0.30);
+                0 12px 25px rgba(22, 138, 87, 0.30);
         }
 
 
@@ -452,7 +637,9 @@
         }
 
 
-        /* Arrow */
+        /* =========================
+           ARROW
+        ========================== */
 
         .arrow {
             margin-left: 8px;
@@ -467,6 +654,122 @@
             margin-left: 14px;
         }
 
+
+        /* =========================
+           FORGOT PASSWORD
+        ========================== */
+
+        .forgot-link {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 17px;
+
+            color: #168a57;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+
+        .forgot-link:hover {
+            color: #0f7046;
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           FORGOT PASSWORD BOX
+        ========================== */
+
+        .forgot-password-box {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 20px;
+
+            background: #f1faf4;
+
+            border: 1px solid #cfe7d8;
+
+            border-radius: 12px;
+        }
+
+
+        .forgot-password-box h3 {
+            text-align: center;
+
+            color: #174d36;
+
+            margin-bottom: 18px;
+
+            font-size: 17px;
+        }
+
+
+        .forgot-password-box input {
+            padding: 0 15px;
+        }
+
+
+        /* =========================
+           RESET BUTTON
+        ========================== */
+
+        .reset-btn {
+            width: 100%;
+
+            height: 45px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #168a57,
+                    #0f7046
+                );
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: all 0.25s ease;
+        }
+
+
+        .reset-btn:hover {
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f7046,
+                    #095a38
+                );
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================
+           INFORMATION
+        ========================== */
+
         .login-info {
             width: 100%;
 
@@ -476,9 +779,11 @@
 
             border-radius: 10px;
 
-            background: #edf6f0;
+            background: #eaf7ef;
 
-            color: #527263;
+            border: 1px solid #d3eadb;
+
+            color: #39775b;
 
             text-align: center;
 
@@ -487,29 +792,10 @@
             line-height: 1.5;
         }
 
-        .forgot-link {
-            display: block;
 
-            text-align: center;
-
-            margin-top: 17px;
-
-            color: #536b5d;
-
-            text-decoration: none;
-
-            font-size: 13px;
-
-            font-weight: 600;
-        }
-
-
-        .forgot-link:hover {
-            color: #344f41;
-
-            text-decoration: underline;
-        }
-
+        /* =========================
+           RESPONSIVE
+        ========================== */
 
         @media (max-width: 520px) {
 
@@ -535,10 +821,22 @@
 
                 border-radius: 18px;
             }
+
+
+            .left-leaves {
+                left: -30px;
+            }
+
+
+            .right-leaves {
+                right: -40px;
+            }
         }
 
 
-        /* Small phones */
+        /* =========================
+           SMALL PHONES
+        ========================== */
 
         @media (max-width: 360px) {
 
@@ -553,33 +851,44 @@
         }
 
     </style>
-
 </head>
 
 
 <body>
 
-    <main class="page">
+    <!-- =========================
+         BACKGROUND LEAVES
+    ========================== -->
+
+    <div class="leaf-decoration left-leaves">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
 
-        <div class="heading">
-
-            <h1>Candidate Login</h1>
-
-            <p>
-                Access your ExamGuard candidate account
-            </p>
-
-            <div class="leaf"></div>
-
-        </div>
+    <div class="leaf-decoration right-leaves">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
 
+    <!-- =========================
+         MAIN PAGE
+    ========================== -->
+
+    <div class="page">
+
+
+        <!-- =========================
+             LOGIN CARD
+        ========================== -->
 
         <div class="login-card">
 
 
-            <!-- ExamGuard -->
+            <!-- BRAND -->
 
             <div class="brand-title">
 
@@ -592,11 +901,24 @@
             </div>
 
 
+            <!-- HEADING -->
 
-            <!-- Login Form -->
+            <div class="heading">
 
-            <form method="POST">
+                <h1>Candidate Login</h1>
 
+                <p>
+                    Login to your ExamGuard candidate account
+                </p>
+
+                <div class="leaf"></div>
+
+            </div>
+
+
+            <!-- LOGIN FORM -->
+
+            <form id="loginForm" method="POST" action="/login">
 
                 <!-- EMAIL -->
 
@@ -616,8 +938,7 @@
                             type="email"
                             id="email"
                             name="email"
-                            placeholder="Enter your email address"
-                            autocomplete="email"
+                            placeholder="Enter your email"
                             required
                         >
 
@@ -625,31 +946,25 @@
 
                 </div>
 
+
+                <!-- PASSWORD -->
+
                 <div class="input-group">
 
-                    <label for="password">
-                        Password
-                    </label>
-
-                    <div class="input-wrapper">
-
-                        <span class="input-icon">
-                            🔒
-                        </span>
+                button.textContent = "👁";
 
                         <input
                             type="password"
                             id="password"
                             name="password"
                             placeholder="Enter your password"
-                            autocomplete="current-password"
                             required
                         >
 
                         <button
                             type="button"
                             class="show-password"
-                            onclick="togglePassword()"
+                            id="togglePassword"
                             aria-label="Show password"
                         >
                             👁
@@ -660,13 +975,13 @@
                 </div>
 
 
-
                 <!-- LOGIN BUTTON -->
 
                 <button
                     type="submit"
                     class="login-btn"
                 >
+
                     Login
 
                     <span class="arrow">
@@ -675,64 +990,186 @@
 
                 </button>
 
-
             </form>
 
+
+            <!-- FORGOT PASSWORD -->
+
+            <a
+                class="forgot-link"
+                id="forgotLink"
+            >
+                Forgot Password?
+            </a>
+
+
+            <!-- RESET PASSWORD BOX -->
+
+            <div
+                class="forgot-password-box"
+                id="forgotPasswordBox"
+            >
+
+                <h3>
+                    Reset Password
+                </h3>
+
+
+                <div class="input-group">
+
+                    <label for="resetEmail">
+                        Registered Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="resetEmail"
+                        placeholder="Enter registered email"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="newPassword">
+                        New Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="newPassword"
+                        placeholder="Enter new password"
+                    >
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="reset-btn"
+                    id="resetButton"
+                >
+                    Reset Password
+                </button>
+
+            </div>
 
 
             <!-- INFORMATION -->
 
             <div class="login-info">
 
-                ℹ️ &nbsp;
-                Login with your registered email and password
+                🔒 Login with your registered email and password
 
             </div>
 
-        
 
         </div>
 
-    </main>
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
 
     <script>
 
-        function togglePassword() {
+        /* =========================
+           SHOW / HIDE PASSWORD
+        ========================== */
 
-            const password =
-                document.getElementById("password");
+        const togglePassword =
+            document.getElementById("togglePassword");
 
-            const button =
-                document.querySelector(".show-password");
+        const password =
+            document.getElementById("password");
 
+
+        togglePassword.addEventListener("click", function () {
 
             if (password.type === "password") {
 
                 password.type = "text";
 
-                button.textContent = "Hide";
-
-                button.setAttribute(
-                    "aria-label",
-                    "Hide password"
-                );
+                togglePassword.textContent = "🙈";
 
             } else {
 
                 password.type = "password";
 
-                button.textContent = "👁";
+                togglePassword.textContent = "👁";
 
-                button.setAttribute(
-                    "aria-label",
-                    "Show password"
-                );
             }
 
-        }
+        });
+
+
+        /* =========================
+           FORGOT PASSWORD
+        ========================== */
+
+        const forgotLink =
+            document.getElementById("forgotLink");
+
+        const forgotPasswordBox =
+            document.getElementById("forgotPasswordBox");
+
+
+        forgotLink.addEventListener("click", function () {
+
+            if (
+                forgotPasswordBox.style.display === "block"
+            ) {
+
+                forgotPasswordBox.style.display = "none";
+
+            } else {
+
+                forgotPasswordBox.style.display = "block";
+
+            }
+
+        });
+
+
+        /* =========================
+           LOGIN FORM
+        ========================== */
+
+
+
+        /* =========================
+           RESET PASSWORD
+        ========================== */
+
+        const resetButton =
+            document.getElementById("resetButton");
+
+
+        resetButton.addEventListener("click", function () {
+
+            const resetEmail =
+                document.getElementById("resetEmail").value;
+
+            const newPassword =
+                document.getElementById("newPassword").value;
+
+
+            if (!resetEmail || !newPassword) {
+
+                alert("Please enter email and new password.");
+
+                return;
+            }
+
+
+            alert("Password reset request submitted.");
+
+        });
 
     </script>
-
 
 </body>
 
