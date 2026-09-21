@@ -22,6 +22,8 @@ def get_db():
 
     connection.row_factory = sqlite3.Row
 
+    connection = sqlite3.connect(DB)
+    connection.row_factory = sqlite3.Row
     return connection
 
 

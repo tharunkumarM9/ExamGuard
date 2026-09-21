@@ -1,8 +1,10 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
-    <title>ExamGuard Registration</title>
+
+    <title>Candidate Registration</title>
 
     <style>
 
@@ -13,640 +15,386 @@
 
 /* =========================
    BODY
-========================= */
-
-body {
-
-    font-family: "Segoe UI", Arial, sans-serif;
-
-    margin: 0;
-
-    padding: 35px;
-
-    min-height: 100vh;
-
-    background:
-        radial-gradient(
-            circle at 10% 10%,
-            #d8f3e3 0,
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 90% 90%,
-            #e3f6ea 0,
-            transparent 30%
-        ),
-        #f4fbf7;
-
-    color: #26332d;
-
-    overflow-x: hidden;
-}
-
-
-/* =========================
-   BACKGROUND DECORATION
-========================= */
-
-body::before,
-body::after {
-
-    content: "";
-
-    position: fixed;
-
-    border-radius: 50%;
-
-    z-index: -1;
-
-    opacity: 0.45;
-
-    animation: float 7s ease-in-out infinite;
-}
-
-
-body::before {
-
-    width: 300px;
-    height: 300px;
-
-    background: #a8ddbd;
-
-    top: -130px;
-    left: -100px;
-}
-
-
-body::after {
-
-    width: 350px;
-    height: 350px;
-
-    background: #bfe8ce;
-
-    bottom: -170px;
-    right: -120px;
-
-    animation-delay: 2s;
-}
-
-
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(20px);
-    }
-}
-
-
-/* =========================
-   FORM CONTAINER
-========================= */
-
-.form-container {
-
-    width: 100%;
-
-    max-width: 1050px;
-
-    margin: auto;
-
-    padding: 35px 40px;
-
-    background: rgba(255, 255, 255, 0.97);
-
-    border-radius: 22px;
-
-    border: 1px solid rgba(197, 222, 208, 0.9);
-
-    box-shadow:
-        0 25px 60px rgba(22, 138, 87, 0.13),
-        0 5px 15px rgba(38, 51, 45, 0.05);
-
-    backdrop-filter: blur(10px);
-
-    animation: cardAppear 0.7s ease;
-}
-
-
-@keyframes cardAppear {
-
-    from {
-
-        opacity: 0;
-
-        transform: translateY(25px);
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform: translateY(0);
-    }
-}
-
-
-/* =========================
-   MAIN HEADING
-========================= */
-
-h2 {
-
-    margin: 0 0 30px 0;
-
-    padding: 0 0 18px 15px;
-
-    font-size: 30px;
-
-    color: #126b45;
-
-    border-bottom: 2px solid #dcefe4;
-
-    position: relative;
-}
-
-
-/* Green highlight */
-
-h2::before {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-
-    top: 2px;
-
-    width: 5px;
-
-    height: 32px;
-
-    border-radius: 5px;
-
-    background:
-        linear-gradient(
-            #168a57,
-            #0f7046
-        );
-}
-
-
-/* =========================
-   LABEL
-========================= */
-
-label {
-
-    display: block;
-
-    margin-top: 18px;
-
-    margin-bottom: 7px;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    color: #174d36;
-}
-
-
-/* =========================
-   INPUT
-========================= */
-
-input {
-
-    width: 100%;
-
-    height: 52px;
-
-    padding: 12px 16px;
-
-    margin-top: 0;
-
-    font-family: inherit;
-
-    font-size: 15px;
-
-    color: #26332d;
-
-    background: #fbfefc;
-
-    border: 1.5px solid #c5ded0;
-
-    border-radius: 11px;
-
-    outline: none;
-
-    transition: all 0.25s ease;
-}
-
-
-input:hover {
-
-    border-color: #80b99a;
-
-    background: #ffffff;
-}
-
-
-input:focus {
-
-    border-color: #168a57;
-
-    background: #ffffff;
-
-    box-shadow:
-        0 0 0 4px rgba(22, 138, 87, 0.12);
-}
-
-
-input::placeholder {
-
-    color: #9aaa9f;
-}
-
-
-/* =========================
-   SECTION HEADING
-========================= */
-
-h3 {
-
-    margin-top: 28px;
-
-    margin-bottom: 12px;
-
-    padding: 13px 18px;
-
-    font-size: 20px;
-
-    color: #174d36;
-
-    background:
-        linear-gradient(
-            90deg,
-            #eaf7ef,
-            #f2faf5
-        );
-
-    border-left: 5px solid #168a57;
-
-    border-radius: 8px;
-}
-
-
-/* =========================
-   CAMERA
-========================= */
-
-video {
-
-    width: 100%;
-
-    max-width: 650px;
-
-    height: 300px;
-
-    display: block;
-
-    margin-top: 12px;
-
-    background: #33483d;
-
-    border: 4px solid #c5ded0;
-
-    border-radius: 14px;
-
-    object-fit: cover;
-
-    box-shadow:
-        0 8px 22px rgba(38, 80, 55, 0.16);
-}
-
-
-/* =========================
-   BUTTONS
-========================= */
-
-button {
-
-    padding: 13px 22px;
-
-    margin: 14px 8px 10px 0;
-
-    border-radius: 10px;
-
-    border: none;
-
-    font-family: inherit;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition: all 0.25s ease;
-}
-
-
-/* =========================
-   START CAMERA
-========================= */
-
-#startCamera {
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #168a57,
-            #0f7046
-        );
-
-    box-shadow:
-        0 5px 14px rgba(22, 138, 87, 0.22);
-}
-
-
-#startCamera:hover {
-
-    transform: translateY(-2px);
-
-    background:
-        linear-gradient(
-            135deg,
-            #0f7046,
-            #095a38
-        );
-
-    box-shadow:
-        0 9px 20px rgba(22, 138, 87, 0.28);
-}
-
-
-/* =========================
-   CAPTURE PHOTO
-========================= */
-
-#capturePhoto {
-
-    color: #126b45;
-
-    background: #ffffff;
-
-    border: 1px solid #b8d8c6;
-}
-
-
-#capturePhoto:hover:not(:disabled) {
-
-    background: #eaf7ef;
-
-    border-color: #63aa82;
-
-    transform: translateY(-2px);
-}
-
-
-/* =========================
-   DISABLED
-========================= */
-
-button:disabled {
-
-    opacity: 0.45;
-
-    cursor: not-allowed;
-}
-
-
-/* =========================
-   PHOTO PREVIEW
-========================= */
-
-#preview {
-
-    width: 180px;
-
-    height: 180px;
-
-    margin-top: 15px;
-
-    display: none;
-
-    object-fit: cover;
-
-    border: 4px solid #168a57;
-
-    border-radius: 12px;
-
-    background: white;
-
-    box-shadow:
-        0 7px 18px rgba(22, 138, 87, 0.18);
-}
-
-
-/* =========================
-   CANVAS
-========================= */
-
-#canvas {
-
-    display: none;
-}
-
-
-/* =========================
-   PHOTO STATUS
-========================= */
-
-#photoStatus {
-
-    display: inline-block;
-
-    margin-top: 10px;
-
-    padding: 9px 14px;
-
-    border-radius: 8px;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    color: #39775b;
-
-    background: #eaf7ef;
-
-    border-left: 4px solid #168a57;
-}
-
-
-/* =========================
-   REGISTER BUTTON
-========================= */
-
-#registerButton {
-
-    width: 100%;
-
-    margin-top: 25px;
-
-    padding: 16px;
-
-    border-radius: 11px;
-
-    border: none;
-
-    color: white;
-
-    font-family: inherit;
-
-    font-size: 17px;
-
-    font-weight: 700;
-
-    letter-spacing: 0.8px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #168a57,
-            #0f7046
-        );
-
-    box-shadow:
-        0 8px 20px
-        rgba(22, 138, 87, 0.24);
-
-}
-
-
-#registerButton:hover:not(:disabled) {
-
-    transform: translateY(-2px);
-
-    background:
-        linear-gradient(
-            135deg,
-            #0f7046,
-            #095a38
-        );
-
-    box-shadow:
-        0 12px 25px
-        rgba(22, 138, 87, 0.32);
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 700px) {
-
-    body {
-
-        padding: 15px;
-
-    }
-
-
-    .form-container {
-
-        padding: 25px 20px;
-
-        border-radius: 18px;
-
-    }
-
-
-    h2 {
-
-        font-size: 25px;
-
-    }
-
-
-    video {
-
-        height: 240px;
-
-    }
-
-
-    button {
-
-        width: 100%;
-
-        margin-right: 0;
-
-    }
-
-}
-
 </style>
     
 
 </head>
 
+
 <body>
 
-    <h1>Candidate Registration</h1>
 
-    <form method="POST" enctype="multipart/form-data">
+<div class="form-container">
+
+
+    <h2>Candidate Registration</h2>
+
+
+    <form method="POST" id="registerForm">
+
+
+        <!-- NAME -->
 
         <label>Name</label>
 
-        <input 
-            type="text" 
+        <input
+            type="text"
             name="name"
+            required
         >
 
-        <br><br>
+
+        <br>
+
+
+        <!-- EMAIL -->
 
         <label>Email</label>
 
-        <input 
-            type="email" 
+        <input
+            type="email"
             name="email"
+            required
         >
 
-        <br><br>
+
+        <br>
+
+
+        <!-- PASSWORD -->
 
         <label>Password</label>
 
-
-        <input 
-            type="password" 
+        <input
+            type="password"
             name="password"
+            required
         >
 
-        <br><br>
-        <label>Photo</label>
 
-        <input type="file" name="photo" accept="image/*" required>
         <br><br>
 
-        
 
-        <button type="submit">
-            Register
+        <!-- CAMERA -->
+
+        <h3>Candidate Photo</h3>
+
+
+        <video
+            id="camera"
+            autoplay
+            playsinline
+        ></video>
+
+
+        <br>
+
+
+        <!-- START CAMERA -->
+
+        <button
+            type="button"
+            id="startCamera"
+        >
+
+            Start Camera
+
         </button>
 
+
+        <!-- CAPTURE PHOTO -->
+
+        <button
+            type="button"
+            id="capturePhoto"
+            disabled
+        >
+
+            Capture Photo
+
+        </button>
+
+
+        <!-- CANVAS -->
+
+        <canvas id="canvas"></canvas>
+
+
+        <!-- PHOTO PREVIEW -->
+
+        <img
+            id="preview"
+            alt="Captured Photo"
+        >
+
+
+        <p id="photoStatus"></p>
+
+
+        <br>
+
+
+        <!-- REGISTER -->
+
+        <button
+            type="submit"
+            id="registerButton"
+            disabled
+        >
+
+            Register
+
+        </button>
+
+
     </form>
+
+
+</div>
+
+
+<script>
+
+
+    // ----------------------------------------
+    // Get HTML elements
+    // ----------------------------------------
+
+    const video =
+        document.getElementById("camera");
+
+
+    const canvas =
+        document.getElementById("canvas");
+
+
+    const preview =
+        document.getElementById("preview");
+
+
+    const startCameraButton =
+        document.getElementById("startCamera");
+
+
+    const captureButton =
+        document.getElementById("capturePhoto");
+
+
+    const registerButton =
+        document.getElementById("registerButton");
+
+
+    const photoStatus =
+        document.getElementById("photoStatus");
+
+
+    // Store camera stream
+
+    let cameraStream = null;
+
+
+
+    // ----------------------------------------
+    // START CAMERA
+    // ----------------------------------------
+
+    startCameraButton.addEventListener(
+        "click",
+        async function () {
+
+            try {
+
+                // Ask browser for camera permission
+
+                cameraStream =
+                    await navigator.mediaDevices.getUserMedia({
+
+                        video: true
+
+                    });
+
+
+                // Show camera inside video element
+
+                video.srcObject =
+                    cameraStream;
+
+
+                // Enable capture button
+
+                captureButton.disabled =
+                    false
+                photoStatus.textContent =
+                    "Camera started. Position your face and click Capture Photo.";
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+
+                photoStatus.textContent =
+                    "Unable to access camera. Please allow camera permission.";
+
+            }
+
+        }
+    );
+
+
+
+    // ----------------------------------------
+    // CAPTURE PHOTO
+    // ----------------------------------------
+
+    captureButton.addEventListener(
+        "click",
+        function () {
+
+
+            // Set canvas size same as camera
+
+            canvas.width =
+                video.videoWidth;
+
+
+            canvas.height =
+                video.videoHeight;
+
+
+            // Get canvas drawing context
+
+            const context =
+                canvas.getContext("2d");
+
+
+            // Copy video frame to canvas
+
+            context.drawImage(
+                video,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            // Display captured image
+
+            const imageData =
+                canvas.toDataURL("image/jpeg");
+
+
+            preview.src =
+                imageData;
+
+
+            preview.style.display =
+                "block";
+
+
+            photoStatus.textContent =
+                "Photo captured. Saving...";
+
+
+
+            // Convert canvas image
+            // into Blob
+
+            canvas.toBlob(
+                async function (blob) {
+
+
+                    // Create form data
+
+                    const formData =
+                        new FormData();
+
+
+                    // Add photo
+
+                    formData.append(
+                        "photo",
+                        blob,
+                        "candidate.jpg"
+                    );
+
+
+
+                    // Send photo to Flask
+
+                    const response =
+                        await fetch(
+                            "/capture-photo",
+                            {
+                                method: "POST",
+                                body: formData
+                            }
+                        );
+
+
+
+                    // Convert response to JSON
+
+                    const result =
+                        await response.json();
+
+
+
+                    // Check result
+
+                    if (result.success) {
+
+
+                        photoStatus.textContent =
+                            "Photo captured successfully!";
+
+
+                        // Enable Register button
+
+                        registerButton.disabled =
+                            false;
+
+
+
+                        // Stop camera
+
+                        if (cameraStream) {
+
+                            cameraStream
+                                .getTracks()
+                                .forEach(
+                                    function(track) {
+
+                                        track.stop();
+
+                                    }
+                                );
+
+                        }
+
+                    }
+
+                    else {
+
+
+                        photoStatus.textContent =
+                            "Photo capture failed.";
+
+                    }
+
+
+                },
+                "image/jpeg"
+            );
+
+        }
+    );
+
+
+</script>
+
 
 </body>
 
