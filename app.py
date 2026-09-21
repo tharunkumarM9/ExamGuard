@@ -12,6 +12,12 @@ from monitoring.face_logger import log_face_state
 from monitoring.face_monitoring import detect_face
 
 
+from flask import Flask, redirect, request, render_template, session, redirect 
+from database import init_db, get_db
+from werkzeug.security import check_password_hash, generate_password_hash,check_password_hash
+from werkzeug.utils import secure_filename
+from database import init_db, get_db
+from camera import capture_photo
 
 
 # ----------------------------------------
@@ -89,7 +95,7 @@ def captureCandidatePhoto():
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
-    if request.method == "POST":
+#     if request.method == "POST":
 
         # ----------------------------------------
         # GET FORM DATA
@@ -155,7 +161,32 @@ def register():
 
         hashed_password = generate_password_hash(password)
 
+    # return render_template("register.html")
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form.get('name', '').strip()
+        email = request.form.get('email', '').strip()
+        password = request.form.get('password', '').strip()
+       # photo = request.files.get('candidate_photo')
+
+        if not username or not email or not password:
+            return render_template('register.html', error="Please fill in all required fields.")
+        photo_path = session.get("capture_photo")
+        if not photo_path:
+            return render_template('register.html', error="Please capture a photo before registering.")
+    try:    
         connection = get_db()
+        print("candidate email:", email)
+
+        
+    
+        
+        # Check if email is already registered
+        # connection.execute("SELECT id FROM candidates WHERE email = ?", (email,))
+        # if connection.fetchone():
+        #     connection.close()
+        #     return render_template('register.html', error="An account with this email already exists.")
 
         try:
 

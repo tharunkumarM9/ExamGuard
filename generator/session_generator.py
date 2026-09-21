@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import random
 import sys
 import uuid
@@ -102,3 +103,11 @@ def generate(num_candidates=DEFAULT_NUM_CANDIDATES):
 if __name__ == "__main__":
     count = int(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_NUM_CANDIDATES
     generate(count)
+=======
+from faker import Faker
+fake=Faker()
+for i in range(10):
+    print(fake.name())
+    print(fake.phone_number())
+    print(fake.email())
+>>>>>>> 3b6c8cfead7520394589ca6015f329db1ce3d953
