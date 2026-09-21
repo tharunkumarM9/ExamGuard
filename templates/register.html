@@ -1,28 +1,547 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ExamGuard | Candidate Registration</title>
+
+=======
 
 <html>
 
 <head>
 
     <title>Candidate Registration</title>
+>>>>>>> 3b6c8cfead7520394589ca6015f329db1ce3d953
 
     <style>
 
-* {
-    box-sizing: border-box;
-}
+    /* =========================
+       RESET
+    ========================= */
 
+<<<<<<< HEAD
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    /* =========================
+       BODY
+    ========================= */
+
+    body {
+        min-height: 100vh;
+        padding: 35px;
+
+        font-family: "Segoe UI", Arial, sans-serif;
+
+        background:
+            radial-gradient(
+                circle at 10% 10%,
+                #dcecff 0,
+                transparent 28%
+            ),
+
+            radial-gradient(
+                circle at 90% 90%,
+                #e6f2ff 0,
+                transparent 30%
+            ),
+
+            #f4f8ff;
+
+        color: #26384d;
+    }
+
+
+    /* =========================
+       MAIN CARD
+    ========================= */
+
+    form {
+        width: 100%;
+        max-width: 1100px;
+
+        margin: auto;
+        padding: 35px 45px 40px;
+
+        background: rgba(255, 255, 255, 0.98);
+
+        border: 1px solid #d5e3f3;
+
+        border-radius: 22px;
+
+        box-shadow:
+            0 20px 50px rgba(25, 88, 150, 0.13),
+            0 5px 15px rgba(0, 0, 0, 0.04);
+    }
+
+
+    /* =========================
+       HEADING
+    ========================= */
+
+    h1 {
+        max-width: 1100px;
+
+        margin: 0 auto 28px;
+
+        padding-left: 17px;
+        padding-bottom: 17px;
+
+        font-size: 30px;
+        font-weight: 700;
+
+        color: #1559a6;
+
+        border-bottom: 2px solid #e0ebf8;
+
+        position: relative;
+    }
+
+
+    h1::before {
+        content: "";
+
+        position: absolute;
+
+        left: 0;
+        top: 0;
+
+        width: 5px;
+        height: 35px;
+
+        border-radius: 5px;
+
+        background:
+            linear-gradient(
+                180deg,
+                #1976d2,
+                #0d47a1
+            );
+    }
+
+
+    /* =========================
+       LABELS
+    ========================= */
+
+    label {
+        display: block;
+
+        margin-top: 18px;
+        margin-bottom: 7px;
+
+        font-size: 14px;
+        font-weight: 700;
+
+        color: #285785;
+    }
+
+
+    /* =========================
+       INPUTS
+    ========================= */
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+
+        width: 100%;
+        height: 52px;
+
+        padding: 12px 16px;
+
+        font-family: inherit;
+        font-size: 15px;
+
+        color: #26384d;
+
+        background: #fbfdff;
+
+        border: 1.5px solid #c7d9ec;
+
+        border-radius: 11px;
+
+        outline: none;
+
+        transition: all 0.25s ease;
+    }
+
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+
+        border-color: #1976d2;
+
+        background: white;
+
+        box-shadow:
+            0 0 0 4px rgba(25, 118, 210, 0.12);
+    }
+
+
+    /* =========================
+       CAMERA SECTION
+    ========================= */
+
+    .photo-section {
+
+        margin-top: 28px;
+
+        padding: 20px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #eef6ff,
+                #f8fbff
+            );
+
+        border: 1px solid #d4e4f5;
+
+        border-radius: 14px;
+    }
+
+
+    /* =========================
+       PHOTO TITLE
+    ========================= */
+
+    .photo-title {
+
+        margin-bottom: 14px;
+
+        padding: 12px 16px;
+
+        font-size: 19px;
+        font-weight: 700;
+
+        color: #1559a6;
+
+        background: #e6f1ff;
+
+        border-left: 5px solid #1976d2;
+
+        border-radius: 8px;
+    }
+
+
+    /* =========================
+       CAMERA
+    ========================= */
+
+    video {
+
+        width: 100%;
+        max-width: 650px;
+        height: 300px;
+
+        display: block;
+
+        margin: 0 auto 15px;
+
+        background: #26384d;
+
+        border: 4px solid #b9d2ec;
+
+        border-radius: 14px;
+
+        object-fit: cover;
+
+        box-shadow:
+            0 8px 22px rgba(31, 91, 145, 0.18);
+    }
+
+
+    /* =========================
+       PHOTO PREVIEW
+    ========================= */
+
+    #preview {
+
+        width: 180px;
+        height: 180px;
+
+        display: none;
+
+        margin: 15px auto;
+
+        object-fit: cover;
+
+        border: 4px solid #1976d2;
+
+        border-radius: 14px;
+
+        background: white;
+
+        box-shadow:
+            0 8px 20px rgba(25, 118, 210, 0.18);
+    }
+
+
+    /* =========================
+       CAMERA BUTTONS
+    ========================= */
+
+    .camera-buttons {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        flex-wrap: wrap;
+    }
+
+
+    button {
+
+        padding: 12px 22px;
+
+        border-radius: 9px;
+
+        border: none;
+
+        font-family: inherit;
+
+        font-size: 14px;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        transition: all 0.25s ease;
+    }
+
+
+    /* =========================
+       START CAMERA
+    ========================= */
+
+    #startCamera {
+
+        color: white;
+
+        background:
+            linear-gradient(
+                135deg,
+                #1976d2,
+                #0d47a1
+            );
+
+        box-shadow:
+            0 5px 14px rgba(25, 118, 210, 0.22);
+    }
+
+
+    #startCamera:hover {
+
+        transform: translateY(-2px);
+
+        background:
+            linear-gradient(
+                135deg,
+                #1565c0,
+                #0b3d91
+            );
+    }
+
+
+    /* =========================
+       CAPTURE PHOTO
+    ========================= */
+
+    #capturePhoto {
+
+        color: #1559a6;
+
+        background: white;
+
+        border: 1px solid #a9c6e5;
+    }
+
+
+    #capturePhoto:hover:not(:disabled) {
+
+        background: #eaf4ff;
+
+        border-color: #1976d2;
+
+        transform: translateY(-2px);
+    }
+
+
+    /* =========================
+       DISABLED
+    ========================= */
+
+    button:disabled {
+
+        opacity: 0.45;
+
+        cursor: not-allowed;
+    }
+
+
+    /* =========================
+       PHOTO STATUS
+    ========================= */
+
+    #photoStatus {
+
+        display: inline-block;
+
+        margin-top: 10px;
+
+        padding: 8px 13px;
+
+        font-size: 13px;
+
+        font-weight: 600;
+
+        color: #25629a;
+
+        background: #e6f1ff;
+
+        border-left: 4px solid #1976d2;
+
+        border-radius: 7px;
+    }
+
+
+    /* =========================
+       HIDDEN CANVAS
+    ========================= */
+
+    #canvas {
+        display: none;
+    }
+
+
+    /* =========================
+       REGISTER BUTTON
+    ========================= */
+
+    #registerButton {
+
+        width: 100%;
+        height: 55px;
+
+        margin-top: 28px;
+
+        color: white;
+
+        background:
+            linear-gradient(
+                135deg,
+                #1976d2,
+                #0d47a1
+            );
+
+        border: none;
+
+        border-radius: 11px;
+
+        font-size: 17px;
+        font-weight: 700;
+
+        letter-spacing: 0.5px;
+
+        box-shadow:
+            0 8px 20px rgba(25, 118, 210, 0.25);
+    }
+
+
+    #registerButton:hover {
+
+        transform: translateY(-2px);
+
+        background:
+            linear-gradient(
+                135deg,
+                #1565c0,
+                #0b3d91
+            );
+
+        box-shadow:
+            0 12px 25px rgba(25, 118, 210, 0.32);
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+        body {
+            padding: 15px;
+        }
+
+
+        form {
+            padding: 25px 20px 30px;
+
+            border-radius: 18px;
+        }
+
+
+        h1 {
+            font-size: 25px;
+        }
+
+
+        video {
+            height: 240px;
+        }
+
+
+        .camera-buttons {
+
+            flex-direction: column;
+
+            align-items: stretch;
+        }
+
+
+        .camera-buttons button {
+            width: 100%;
+        }
+
+    }
+
+=======
 
 /* =========================
    BODY
+>>>>>>> 3b6c8cfead7520394589ca6015f329db1ce3d953
 </style>
-    
 
 </head>
 
 
 <body>
 
+<<<<<<< HEAD
+
+    <!-- =========================
+         PAGE HEADING
+    ========================== -->
+
+    <h1>Candidate Registration</h1>
+
+=======
 
 <div class="form-container">
 
@@ -34,9 +553,33 @@
 
 
         <!-- NAME -->
+>>>>>>> 3b6c8cfead7520394589ca6015f329db1ce3d953
 
-        <label>Name</label>
+    <!-- =========================
+         REGISTRATION FORM
+    ========================== -->
 
+<<<<<<< HEAD
+    <form method="POST"
+          enctype="multipart/form-data"
+          id="registrationForm">
+
+
+        <!-- NAME -->
+
+        <label for="name">
+            Name
+        </label>
+
+        <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your full name"
+            required
+        >
+
+=======
         <input
             type="text"
             name="name"
@@ -48,9 +591,24 @@
 
 
         <!-- EMAIL -->
+>>>>>>> 3b6c8cfead7520394589ca6015f329db1ce3d953
 
-        <label>Email</label>
+        <!-- EMAIL -->
 
+<<<<<<< HEAD
+        <label for="email">
+            Email
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email address"
+            required
+        >
+
+=======
         <input
             type="email"
             name="email"
@@ -62,16 +620,116 @@
 
 
         <!-- PASSWORD -->
+>>>>>>> 3b6c8cfead7520394589ca6015f329db1ce3d953
 
-        <label>Password</label>
+        <!-- PASSWORD -->
+
+<<<<<<< HEAD
+        <label for="password">
+            Password
+        </label>
 
         <input
             type="password"
+            id="password"
             name="password"
+            placeholder="Create your password"
+=======
+        <input
+            type="password"
+            name="password"
+>>>>>>> 3b6c8cfead7520394589ca6015f329db1ce3d953
             required
         >
 
 
+<<<<<<< HEAD
+        <!-- =========================
+             PHOTO SECTION
+        ========================== -->
+
+        <div class="photo-section">
+
+
+            <div class="photo-title">
+                Candidate Photo
+            </div>
+
+
+            <!-- CAMERA -->
+
+            <video
+                id="video"
+                autoplay
+                playsinline>
+            </video>
+
+
+            <!-- PHOTO PREVIEW -->
+
+            <img
+                id="preview"
+                alt="Candidate Photo Preview"
+            >
+
+
+            <!-- HIDDEN CANVAS -->
+
+            <canvas id="canvas"></canvas>
+
+
+            <!-- BUTTONS -->
+
+            <div class="camera-buttons">
+
+                <button
+                    type="button"
+                    id="startCamera">
+                    Start Camera
+                </button>
+
+
+                <button
+                    type="button"
+                    id="capturePhoto"
+                    disabled>
+                    Capture Photo
+                </button>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div id="photoStatus">
+                Camera not started
+            </div>
+
+
+            <!-- HIDDEN FILE -->
+
+            <input
+                type="file"
+                id="photo"
+                name="photo"
+                accept="image/*"
+                required
+                hidden
+            >
+
+        </div>
+
+
+        <!-- =========================
+             REGISTER
+        ========================== -->
+
+        <button
+            type="submit"
+            id="registerButton">
+
+            Register
+=======
         <br><br>
 
 
@@ -98,10 +756,220 @@
         >
 
             Start Camera
+>>>>>>> 3b6c8cfead7520394589ca6015f329db1ce3d953
 
         </button>
 
 
+<<<<<<< HEAD
+    </form>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        const video =
+            document.getElementById("video");
+
+        const canvas =
+            document.getElementById("canvas");
+
+        const preview =
+            document.getElementById("preview");
+
+        const startCamera =
+            document.getElementById("startCamera");
+
+        const capturePhoto =
+            document.getElementById("capturePhoto");
+
+        const photoStatus =
+            document.getElementById("photoStatus");
+
+        const photoInput =
+            document.getElementById("photo");
+
+
+        let stream = null;
+
+
+        /* =========================
+           START CAMERA
+        ========================== */
+
+        startCamera.addEventListener(
+            "click",
+            async function () {
+
+                try {
+
+                    stream =
+                        await navigator.mediaDevices
+                        .getUserMedia({
+                            video: true,
+                            audio: false
+                        });
+
+
+                    video.srcObject = stream;
+
+                    capturePhoto.disabled = false;
+
+                    photoStatus.textContent =
+                        "Camera started. Position your face and capture the photo.";
+
+                    photoStatus.style.color =
+                        "#28704e";
+
+                }
+
+                catch (error) {
+
+                    console.error(error);
+
+                    photoStatus.textContent =
+                        "Camera access denied or unavailable.";
+
+                    photoStatus.style.color =
+                        "#b33a3a";
+                }
+
+            }
+        );
+
+
+        /* =========================
+           CAPTURE PHOTO
+        ========================== */
+
+        capturePhoto.addEventListener(
+            "click",
+            function () {
+
+                if (!stream) {
+                    return;
+                }
+
+
+                canvas.width =
+                    video.videoWidth;
+
+                canvas.height =
+                    video.videoHeight;
+
+
+                const context =
+                    canvas.getContext("2d");
+
+
+                context.drawImage(
+                    video,
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                );
+
+
+                /* Convert canvas to image */
+
+                canvas.toBlob(
+                    function (blob) {
+
+                        const file =
+                            new File(
+                                [blob],
+                                "candidate_photo.jpg",
+                                {
+                                    type: "image/jpeg"
+                                }
+                            );
+
+
+                        const dataTransfer =
+                            new DataTransfer();
+
+
+                        dataTransfer.items.add(file);
+
+
+                        photoInput.files =
+                            dataTransfer.files;
+
+
+                        /* Preview */
+
+                        const imageURL =
+                            URL.createObjectURL(blob);
+
+                        preview.src =
+                            imageURL;
+
+                        preview.style.display =
+                            "block";
+
+
+                        /* Status */
+
+                        photoStatus.textContent =
+                            "Photo captured successfully.";
+
+                        photoStatus.style.color =
+                            "#28704e";
+
+
+                        /* Stop camera */
+
+                        stream.getTracks().forEach(
+                            function (track) {
+                                track.stop();
+                            }
+                        );
+
+                        video.srcObject = null;
+
+                        capturePhoto.disabled = true;
+
+                    },
+                    "image/jpeg",
+                    0.90
+                );
+
+            }
+        );
+
+
+        /* =========================
+           FORM VALIDATION
+        ========================== */
+
+        document
+        .getElementById("registrationForm")
+        .addEventListener(
+            "submit",
+            function (event) {
+
+                if (!photoInput.files.length) {
+
+                    event.preventDefault();
+
+                    photoStatus.textContent =
+                        "Please capture your photo before registering.";
+
+                    photoStatus.style.color =
+                        "#b33a3a";
+
+                    return;
+                }
+
+            }
+        );
+
+    </script>
+=======
         <!-- CAPTURE PHOTO -->
 
         <button
@@ -395,6 +1263,7 @@
 
 </script>
 
+>>>>>>> 3b6c8cfead7520394589ca6015f329db1ce3d953
 
 </body>
 
