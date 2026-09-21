@@ -2,40 +2,1172 @@
 <html>
 
 <head>
-    <title>ExamGuard Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ExamGuard | Candidate Login</title>
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* =========================
+           BODY
+        ========================== */
+
+        body {
+            min-height: 100vh;
+
+            font-family: "Segoe UI", Arial, sans-serif;
+
+            color: #26332d;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+
+            position: relative;
+
+            background:
+                radial-gradient(
+                    circle at 5% 5%,
+                    #c9f0dc 0,
+                    #c9f0dc 14%,
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 100% 30%,
+                    #d8f5e6 0,
+                    #d8f5e6 12%,
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 0% 90%,
+                    #bdebd3 0,
+                    #bdebd3 14%,
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 100% 90%,
+                    #c4efd8 0,
+                    #c4efd8 16%,
+                    transparent 32%
+                ),
+                #eefaf3;
+        }
+
+
+        /* =========================
+           BACKGROUND CIRCLES
+        ========================== */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+
+            width: 300px;
+            height: 300px;
+
+            top: -130px;
+            left: -100px;
+
+            border-radius: 50%;
+
+            background: #bce8d0;
+
+            opacity: 0.65;
+
+            z-index: 0;
+
+            animation: float 7s ease-in-out infinite;
+        }
+
+
+        body::after {
+            content: "";
+
+            position: fixed;
+
+            width: 350px;
+            height: 350px;
+
+            bottom: -170px;
+            right: -120px;
+
+            border-radius: 50%;
+
+            background: #b8e7ce;
+
+            opacity: 0.7;
+
+            z-index: 0;
+
+            animation: float 7s ease-in-out infinite;
+
+            animation-delay: 2s;
+        }
+
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(20px);
+            }
+        }
+
+
+        /* =========================
+           LEAF BACKGROUND
+        ========================== */
+
+        .leaf-decoration {
+            position: fixed;
+
+            bottom: -20px;
+
+            z-index: 1;
+
+            pointer-events: none;
+        }
+
+
+        .leaf-decoration span {
+            position: absolute;
+
+            width: 55px;
+            height: 150px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #75cda0,
+                    #39a875
+                );
+
+            border-radius: 100% 0 100% 0;
+
+            opacity: 0.55;
+
+            transform-origin: bottom center;
+        }
+
+
+        /* LEFT LEAVES */
+
+        .left-leaves {
+            left: 20px;
+
+            bottom: -20px;
+
+            width: 180px;
+            height: 250px;
+        }
+
+
+        .left-leaves span:nth-child(1) {
+            left: 10px;
+            bottom: 0;
+
+            transform: rotate(-30deg);
+        }
+
+
+        .left-leaves span:nth-child(2) {
+            left: 60px;
+            bottom: 5px;
+
+            transform: rotate(0deg);
+        }
+
+
+        .left-leaves span:nth-child(3) {
+            left: 105px;
+            bottom: 0;
+
+            transform: rotate(30deg);
+        }
+
+
+        /* RIGHT LEAVES */
+
+        .right-leaves {
+            right: 20px;
+
+            bottom: -20px;
+
+            width: 220px;
+            height: 270px;
+        }
+
+
+        .right-leaves span:nth-child(1) {
+            right: 110px;
+            bottom: 0;
+
+            transform: rotate(-35deg);
+        }
+
+
+        .right-leaves span:nth-child(2) {
+            right: 60px;
+            bottom: 5px;
+
+            transform: rotate(0deg);
+        }
+
+
+        .right-leaves span:nth-child(3) {
+            right: 10px;
+            bottom: 0;
+
+            transform: rotate(35deg);
+        }
+
+
+        /* =========================
+           MAIN PAGE
+        ========================== */
+
+        .page {
+            width: 100%;
+
+            max-width: 480px;
+
+            padding: 25px;
+
+            margin: 0 auto;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: stretch;
+
+            position: relative;
+
+            z-index: 5;
+        }
+
+
+        /* =========================
+           HEADING
+        ========================== */
+
+        .heading {
+            width: 100%;
+
+            text-align: center;
+
+            margin: 0 0 25px 0;
+        }
+
+
+        .heading h1 {
+            margin: 0;
+
+            color: #126b45;
+
+            font-size: 34px;
+
+            font-weight: 750;
+
+            letter-spacing: -0.5px;
+        }
+
+
+        .heading p {
+            margin: 8px 0 0;
+
+            color: #66786e;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           DECORATIVE LINE
+        ========================== */
+
+        .leaf {
+            width: 55px;
+
+            height: 4px;
+
+            background: #a8d9ba;
+
+            margin: 15px auto 0;
+
+            border-radius: 10px;
+
+            position: relative;
+        }
+
+
+        .leaf::after {
+            content: "◆";
+
+            position: absolute;
+
+            color: #168a57;
+
+            font-size: 16px;
+
+            left: 19px;
+
+            top: -11px;
+
+            background: #eefaf3;
+
+            padding: 0 5px;
+
+            transform: rotate(45deg);
+        }
+
+
+        /* =========================
+           LOGIN CARD
+        ========================== */
+
+        .login-card {
+            width: 100%;
+
+            margin: 0 auto;
+
+            padding: 40px;
+
+            background: rgba(255, 255, 255, 0.97);
+
+            border: 1px solid rgba(197, 222, 208, 0.9);
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 25px 60px rgba(22, 138, 87, 0.13),
+                0 5px 15px rgba(38, 51, 45, 0.05);
+
+            backdrop-filter: blur(10px);
+
+            position: relative;
+
+            z-index: 10;
+
+            animation: cardAppear 0.7s ease;
+        }
+
+
+        @keyframes cardAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =========================
+           BRAND
+        ========================== */
+
+        .brand-title {
+            text-align: center;
+
+            color: #174d36;
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            margin-bottom: 30px;
+        }
+
+
+        .brand-title span {
+            display: inline-flex;
+
+            width: 48px;
+
+            height: 48px;
+
+            justify-content: center;
+
+            align-items: center;
+
+            border-radius: 50%;
+
+            background: #ddf4e6;
+
+            color: #168a57;
+
+            font-size: 22px;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* =========================
+           INPUT GROUP
+        ========================== */
+
+        .input-group {
+            width: 100%;
+
+            margin-bottom: 22px;
+        }
+
+
+        label {
+            display: block;
+
+            color: #174d36;
+
+            font-weight: 700;
+
+            font-size: 14px;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* =========================
+           INPUT WRAPPER
+        ========================== */
+
+        .input-wrapper {
+            width: 100%;
+
+            position: relative;
+        }
+
+
+        /* =========================
+           INPUT ICON
+        ========================== */
+
+        .input-icon {
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 17px;
+
+            color: #4f8a6d;
+
+            pointer-events: none;
+
+            z-index: 2;
+        }
+
+
+        /* =========================
+           INPUT
+        ========================== */
+
+        input {
+            display: block;
+
+            width: 100%;
+
+            height: 52px;
+
+            padding: 0 45px 0 45px;
+
+            border: 1.5px solid #c5ded0;
+
+            border-radius: 11px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            color: #26332d;
+
+            background: #fbfefc;
+
+            transition: all 0.25s ease;
+        }
+
+
+        input::placeholder {
+            color: #9aaa9f;
+        }
+
+
+        input:hover {
+            border-color: #80b99a;
+        }
+
+
+        input:focus {
+            border-color: #168a57;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 0 0 4px rgba(22, 138, 87, 0.12);
+        }
+
+
+        /* =========================
+           SHOW PASSWORD
+        ========================== */
+
+        .show-password {
+            position: absolute;
+
+            right: 12px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 35px;
+
+            height: 35px;
+
+            border: none;
+
+            background: transparent;
+
+            color: #668575;
+
+            cursor: pointer;
+
+            font-size: 17px;
+
+            padding: 5px;
+
+            border-radius: 50%;
+        }
+
+
+        .show-password:hover {
+            background: #eaf7ef;
+
+            color: #126b45;
+        }
+
+
+        /* =========================
+           LOGIN BUTTON
+        ========================== */
+
+        button.login-btn {
+            display: block;
+
+            width: 100%;
+
+            height: 53px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #168a57,
+                    #0f7046
+                );
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            margin-top: 4px;
+
+            box-shadow:
+                0 8px 18px rgba(22, 138, 87, 0.22);
+
+            transition: all 0.25s ease;
+        }
+
+
+        button.login-btn:hover {
+            transform: translateY(-2px);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f7046,
+                    #095a38
+                );
+
+            box-shadow:
+                0 12px 25px rgba(22, 138, 87, 0.30);
+        }
+
+
+        button.login-btn:active {
+            transform: translateY(0);
+        }
+
+
+        /* =========================
+           ARROW
+        ========================== */
+
+        .arrow {
+            margin-left: 8px;
+
+            font-size: 18px;
+
+            transition: margin-left 0.2s ease;
+        }
+
+
+        button.login-btn:hover .arrow {
+            margin-left: 14px;
+        }
+
+
+        /* =========================
+           FORGOT PASSWORD
+        ========================== */
+
+        .forgot-link {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 17px;
+
+            color: #168a57;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+
+        .forgot-link:hover {
+            color: #0f7046;
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           FORGOT PASSWORD BOX
+        ========================== */
+
+        .forgot-password-box {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 20px;
+
+            background: #f1faf4;
+
+            border: 1px solid #cfe7d8;
+
+            border-radius: 12px;
+        }
+
+
+        .forgot-password-box h3 {
+            text-align: center;
+
+            color: #174d36;
+
+            margin-bottom: 18px;
+
+            font-size: 17px;
+        }
+
+
+        .forgot-password-box input {
+            padding: 0 15px;
+        }
+
+
+        /* =========================
+           RESET BUTTON
+        ========================== */
+
+        .reset-btn {
+            width: 100%;
+
+            height: 45px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #168a57,
+                    #0f7046
+                );
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: all 0.25s ease;
+        }
+
+
+        .reset-btn:hover {
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f7046,
+                    #095a38
+                );
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================
+           INFORMATION
+        ========================== */
+
+        .login-info {
+            width: 100%;
+
+            margin-top: 22px;
+
+            padding: 13px 15px;
+
+            border-radius: 10px;
+
+            background: #eaf7ef;
+
+            border: 1px solid #d3eadb;
+
+            color: #39775b;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 520px) {
+
+            .page {
+                max-width: 100%;
+
+                padding: 18px;
+            }
+
+
+            .heading h1 {
+                font-size: 29px;
+            }
+
+
+            .heading p {
+                font-size: 13px;
+            }
+
+
+            .login-card {
+                padding: 28px 22px;
+
+                border-radius: 18px;
+            }
+
+
+            .left-leaves {
+                left: -30px;
+            }
+
+
+            .right-leaves {
+                right: -40px;
+            }
+        }
+
+
+        /* =========================
+           SMALL PHONES
+        ========================== */
+
+        @media (max-width: 360px) {
+
+            .heading h1 {
+                font-size: 26px;
+            }
+
+
+            .login-card {
+                padding: 25px 18px;
+            }
+        }
+
+    </style>
 </head>
 
 <body>
 
-    <h1>Candidate Login</h1>
+    <!-- =========================
+         BACKGROUND LEAVES
+    ========================== -->
 
-    <form method="POST">
+    <div class="leaf-decoration left-leaves">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
-        <label>Email:</label>
 
-        <input
-            type="email"
-            name="email"
-            required
-        >
+    <div class="leaf-decoration right-leaves">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
-        <br><br>
+
+    <!-- =========================
+         MAIN PAGE
+    ========================== -->
+
+    <div class="page">
+
+
+        <!-- =========================
+             LOGIN CARD
+        ========================== -->
+
+        <div class="login-card">
+
+
+            <!-- BRAND -->
+
+            <div class="brand-title">
+
+                <span>🛡</span>
+
+                <br>
+
+                ExamGuard
+
+            </div>
+
+
+            <!-- HEADING -->
+
+            <div class="heading">
+
+                <h1>Candidate Login</h1>
+
+                <p>
+                    Login to your ExamGuard candidate account
+                </p>
+
+                <div class="leaf"></div>
+
+            </div>
+
+
+            <!-- LOGIN FORM -->
+
+            <form id="loginForm" method="POST" action="/login">
+
+                <!-- EMAIL -->
+
+                <div class="input-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            ✉
+                        </span>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="input-group">
 
         <label>Password:</label>
 
-        <input
-            type="password"
-            name="password"
-            required
-        >
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                        >
 
-        <br><br>
+                        <button
+                            type="button"
+                            class="show-password"
+                            id="togglePassword"
+                            aria-label="Show password"
+                        >
+                            👁
+                        </button>
 
-        <button type="submit">
-            Login
-        </button>
+                    </div>
 
-    </form>
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+
+                    Login
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </button>
+
+            </form>
+
+
+            <!-- FORGOT PASSWORD -->
+
+            <a
+                class="forgot-link"
+                id="forgotLink"
+            >
+                Forgot Password?
+            </a>
+
+
+            <!-- RESET PASSWORD BOX -->
+
+            <div
+                class="forgot-password-box"
+                id="forgotPasswordBox"
+            >
+
+                <h3>
+                    Reset Password
+                </h3>
+
+
+                <div class="input-group">
+
+                    <label for="resetEmail">
+                        Registered Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="resetEmail"
+                        placeholder="Enter registered email"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="newPassword">
+                        New Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="newPassword"
+                        placeholder="Enter new password"
+                    >
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="reset-btn"
+                    id="resetButton"
+                >
+                    Reset Password
+                </button>
+
+            </div>
+
+
+            <!-- INFORMATION -->
+
+            <div class="login-info">
+
+                🔒 Login with your registered email and password
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        /* =========================
+           SHOW / HIDE PASSWORD
+        ========================== */
+
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+        const password =
+            document.getElementById("password");
+
+
+        togglePassword.addEventListener("click", function () {
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                togglePassword.textContent = "🙈";
+
+            } else {
+
+                password.type = "password";
+
+                togglePassword.textContent = "👁";
+
+            }
+
+        });
+
+
+        /* =========================
+           FORGOT PASSWORD
+        ========================== */
+
+        const forgotLink =
+            document.getElementById("forgotLink");
+
+        const forgotPasswordBox =
+            document.getElementById("forgotPasswordBox");
+
+
+        forgotLink.addEventListener("click", function () {
+
+            if (
+                forgotPasswordBox.style.display === "block"
+            ) {
+
+                forgotPasswordBox.style.display = "none";
+
+            } else {
+
+                forgotPasswordBox.style.display = "block";
+
+            }
+
+        });
+
+
+        /* =========================
+           LOGIN FORM
+        ========================== */
+
+
+
+        /* =========================
+           RESET PASSWORD
+        ========================== */
+
+        const resetButton =
+            document.getElementById("resetButton");
+
+
+        resetButton.addEventListener("click", function () {
+
+            const resetEmail =
+                document.getElementById("resetEmail").value;
+
+            const newPassword =
+                document.getElementById("newPassword").value;
+
+
+            if (!resetEmail || !newPassword) {
+
+                alert("Please enter email and new password.");
+
+                return;
+            }
+
+
+            alert("Password reset request submitted.");
+
+        });
+
+    </script>
 
 </body>
 
