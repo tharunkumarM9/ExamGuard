@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import cv2
 import numpy as np
 import os
@@ -48,7 +47,6 @@ def capture_photo(image_data):
     )
 
     return photo_path
-=======
 # #openCV open source computer vision library
 # working on camera, images, videos, face detection, object detection, image processingand more. It is widely used in various applications such as robotics, surveillance, augmented reality, and autonomous vehicles.
 # openCV does not take a photo itself, just it connects to your default webcam and receives continuously video frames and we shouls choose one frame to save as an image.
@@ -116,4 +114,4 @@ def capture_photo(image_data):
     photo_path=os.path.join("static/uploads",filename)
     cv2.imwrite(photo_path,img) #here we are adding capature file with existing filename
     return photo_path     #saved a photo in existing file
->>>>>>> 3b6c8cfead7520394589ca6015f329db1ce3d953
+
