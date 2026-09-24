@@ -41,147 +41,159 @@ def init_db():
     # ----------------------------------------
     # CANDIDATES TABLE
     # ----------------------------------------
-    connection.execute("""
-        CREATE TABLE IF NOT EXISTS candidates (
+    # connection.execute("""
+    #     CREATE TABLE IF NOT EXISTS candidates (
 
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+    #         id INTEGER PRIMARY KEY AUTOINCREMENT,
 
-            name TEXT NOT NULL,
+    #         name TEXT NOT NULL,
 
-            email TEXT NOT NULL UNIQUE,
+    #         email TEXT NOT NULL UNIQUE,
 
-            password TEXT NOT NULL,
+    #         password TEXT NOT NULL,
 
-            photo TEXT,
+    #         photo TEXT,
 
-            created_at TEXT
-        )
-    """)
+    #         created_at TEXT
+    #     )
+    # """)
 
 
     # ----------------------------------------
     # CHECK CREATED_AT COLUMN
     # ----------------------------------------
-    columns = connection.execute(
-        "PRAGMA table_info(candidates)"
-    ).fetchall()
+    # columns = connection.execute(
+    #     "PRAGMA table_info(candidates)"
+    # ).fetchall()
 
-    column_names = [
-        column["name"]
-        for column in columns
-    ]
+    # column_names = [
+    #     column["name"]
+    #     for column in columns
+    # ]
 
-    if "created_at" not in column_names:
+    # if "created_at" not in column_names:
 
-        connection.execute(
-            "ALTER TABLE candidates ADD COLUMN created_at TEXT"
-        )
+    #     connection.execute(
+    #         "ALTER TABLE candidates ADD COLUMN created_at TEXT"
+    #     )
 
 
     # ----------------------------------------
     # EXAM SESSION LIFECYCLE
     # ----------------------------------------
-    connection.execute("""
+    # connection.execute("""
         CREATE TABLE IF NOT EXISTS exam_sessions (
 
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+    #         id INTEGER PRIMARY KEY AUTOINCREMENT,
 
-            candidate_id INTEGER NOT NULL,
+    #         candidate_id INTEGER NOT NULL,
 
-            session_id TEXT UNIQUE NOT NULL,
+    #         session_id TEXT UNIQUE NOT NULL,
 
-            status TEXT NOT NULL DEFAULT 'in_progress',
+    #         status TEXT NOT NULL DEFAULT 'in_progress',
 
-            started_at TEXT NOT NULL,
+    #         started_at TEXT NOT NULL,
 
-            paused_at TEXT,
+    #         paused_at TEXT,
 
-            resumed_at TEXT,
+    #         resumed_at TEXT,
 
-            submitted_at TEXT,
+    #         submitted_at TEXT,
 
-            FOREIGN KEY (candidate_id)
-                REFERENCES candidates(id)
-        )
-    """)
+    #         FOREIGN KEY (candidate_id)
+    #             REFERENCES candidates(id)
+    #     )
+    # """)
 
 
     # ----------------------------------------
     # FACE MONITORING EVENTS
     # ----------------------------------------
-    connection.execute("""
-        CREATE TABLE IF NOT EXISTS face_events (
+    # connection.execute("""
+    #     CREATE TABLE IF NOT EXISTS face_events (
 
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+    #         id INTEGER PRIMARY KEY AUTOINCREMENT,
 
-            candidate_id INTEGER NOT NULL,
+    #         candidate_id INTEGER NOT NULL,
 
-            session_id TEXT NOT NULL,
+    #         session_id TEXT NOT NULL,
 
-            event_type TEXT NOT NULL,
+    #         event_type TEXT NOT NULL,
 
-            started_at TEXT NOT NULL,
+    #         started_at TEXT NOT NULL,
 
-            ended_at TEXT,
+    #         ended_at TEXT,
 
-            duration_seconds REAL,
+    #         duration_seconds REAL,
 
-            FOREIGN KEY (candidate_id)
-                REFERENCES candidates(id)
-        )
-    """)
+    #         FOREIGN KEY (candidate_id)
+    #             REFERENCES candidates(id)
+    #     )
+    # """)
 
 
     # ----------------------------------------
     # BROWSER ACTIVITY EVENTS
     # ----------------------------------------
-    connection.execute("""
-        CREATE TABLE IF NOT EXISTS browser_events (
+    # connection.execute("""
+    #     CREATE TABLE IF NOT EXISTS browser_events (
 
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+    #         id INTEGER PRIMARY KEY AUTOINCREMENT,
 
-            candidate_id INTEGER NOT NULL,
+    #         candidate_id INTEGER NOT NULL,
 
-            session_id TEXT NOT NULL,
+    #         session_id TEXT NOT NULL,
 
-            event_type TEXT NOT NULL,
+    #         event_type TEXT NOT NULL,
 
-            event_time TEXT NOT NULL,
+    #         event_time TEXT NOT NULL,
 
-            details TEXT,
+    #         details TEXT,
 
-            FOREIGN KEY (candidate_id)
-                REFERENCES candidates(id)
-        )
-    """)
+    #         FOREIGN KEY (candidate_id)
+    #             REFERENCES candidates(id)
+    #     )
+    # """)
 
 
     # ----------------------------------------
     # SUSPICIOUS EVENTS
     # ----------------------------------------
-    connection.execute("""
-        CREATE TABLE IF NOT EXISTS suspicious_events (
+    # connection.execute("""
+    #     CREATE TABLE IF NOT EXISTS suspicious_events (
 
+    #         id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    #         candidate_id INTEGER NOT NULL,
+
+    #         session_id TEXT NOT NULL,
+
+    #         event_type TEXT NOT NULL,
+
+    #         reason TEXT NOT NULL,
+
+    #         event_time TEXT NOT NULL,
+
+    #         severity TEXT NOT NULL,
+
+    #         FOREIGN KEY (candidate_id)
+    #             REFERENCES candidates(id)
+    #     )
+    # """)
+
+     connection.execute("""
+        CREATE TABLE IF NOT EXISTS integrity_scores (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-
+            session_id TEXT UNIQUE NOT NULL,
             candidate_id INTEGER NOT NULL,
-
-            session_id TEXT NOT NULL,
-
-            event_type TEXT NOT NULL,
-
-            reason TEXT NOT NULL,
-
-            event_time TEXT NOT NULL,
-
-            severity TEXT NOT NULL,
-
-            FOREIGN KEY (candidate_id)
-                REFERENCES candidates(id)
+            event_penalty REAL NOT NULL,
+            face_presence_ratio REAL NOT NULL,
+            integrity_score REAL NOT NULL,
+            risk_level TEXT NOT NULL,
+            computed_at TEXT NOT NULL,
+            FOREIGN KEY (candidate_id) REFERENCES candidates(id)
         )
     """)
-
-
     # ----------------------------------------
     # CHECK REGISTERED CANDIDATES
     # ----------------------------------------

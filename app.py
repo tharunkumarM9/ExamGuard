@@ -2,6 +2,7 @@ import os
 import sqlite3
 import uuid
 from datetime import datetime
+from monitoring.integrity_score import compute_integrity_score
 
 
 from flask import Flask, request, render_template, session, redirect, url_for
@@ -442,30 +443,107 @@ def resume_exam():
 @app.route("/submit-exam", methods=["POST"])
 def submit_exam():
 
-    if "candidate_id" not in session or "exam_session_id" not in session:
-        return {"success": False, "message": "No active exam session"}, 400
+    # --------------------------------------------------
+    # 1. Check candidate login and active exam session
+    # --------------------------------------------------
+
+    if (
+        "candidate_id" not in session
+        or "exam_session_id" not in session
+    ):
+        return {
+            "success": False,
+            "message": "No active exam session"
+        }, 400
+
+
+    candidate_id = session["candidate_id"]
+
+    exam_session_id = session["exam_session_id"]
+
+
+    # --------------------------------------------------
+    # 2. Record exam submission time
+    # --------------------------------------------------
+
+    submitted_at = datetime.now().isoformat()
+
 
     connection = get_db()
 
     try:
+
         connection.execute("""
             UPDATE exam_sessions
-            SET status = 'submitted', submitted_at = ?
+            SET
+                status = 'submitted',
+                submitted_at = ?
             WHERE session_id = ?
-        """, (datetime.now().isoformat(), session["exam_session_id"]))
+            AND candidate_id = ?
+        """, (
+            submitted_at,
+            exam_session_id,
+            candidate_id
+        ))
+
         connection.commit()
 
+    except Exception as e:
+
+        connection.rollback()
+
+        return {
+            "success": False,
+            "message": str(e)
+        }, 500
+
     finally:
+
         connection.close()
 
-    session.pop("exam_session_id", None)
+    # --------------------------------------------------
+    # 4. Calculate final integrity score
+    # --------------------------------------------------
+
+    result = compute_integrity_score(
+        candidate_id,
+        exam_session_id
+    )
+
+
+    # --------------------------------------------------
+    # 5. Remove active exam session
+    # --------------------------------------------------
+
+    session.pop(
+        "exam_session_id",
+        None
+    )
+
+
+    # --------------------------------------------------
+    # 6. Return final result
+    # --------------------------------------------------
 
     return {
         "success": True,
-        "message": "Exam submitted",
-        "redirect": url_for("dashboard"),
-    }
+        "message": "Exam submitted successfully",
 
+        "integrity_score":
+            result["integrity_score"],
+
+        "face_presence_ratio":
+            result["face_presence_ratio"],
+
+        "event_penalty":
+            result["event_penalty"],
+
+        "risk_level":
+            result["risk_level"],
+
+        "redirect":
+            url_for("dashboard")
+    }
 # ----------------------------------------
 # MONITOR FACE
 # ----------------------------------------
