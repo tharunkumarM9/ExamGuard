@@ -82,7 +82,7 @@ def init_db():
     # EXAM SESSION LIFECYCLE
     # ----------------------------------------
     # connection.execute("""
-        CREATE TABLE IF NOT EXISTS exam_sessions (
+        # CREATE TABLE IF NOT EXISTS exam_sessions (
 
     #         id INTEGER PRIMARY KEY AUTOINCREMENT,
 
@@ -181,7 +181,7 @@ def init_db():
     #     )
     # """)
 
-     connection.execute("""
+zzz    connection.execute("""
         CREATE TABLE IF NOT EXISTS integrity_scores (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             session_id TEXT UNIQUE NOT NULL,

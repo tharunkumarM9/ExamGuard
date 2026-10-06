@@ -1,8 +1,6 @@
 import os
 import sqlite3
 import uuid
-from datetime import datetime
-from monitoring.integrity_score import compute_integrity_score
 
 
 from flask import Flask, request, render_template, session, redirect, url_for
@@ -11,14 +9,44 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from camera import capture_photo
 from monitoring.face_logger import log_face_state
 from monitoring.face_monitoring import detect_face
+from monitoring import event_detector
 
 
-from flask import Flask, redirect, request, render_template, session, redirect 
-from database import init_db, get_db
-from werkzeug.security import check_password_hash, generate_password_hash,check_password_hash
-from werkzeug.utils import secure_filename
-from database import init_db, get_db
-from camera import capture_photo
+from datetime import datetime
+from monitoring.integrity_score import compute_integrity_score
+
+
+# from flask import Flask, request, render_template, session, redirect, url_for
+# from database import init_db, get_db
+# from werkzeug.security import generate_password_hash, check_password_hash
+# from camera import capture_photo
+# from monitoring.face_logger import log_face_state
+# from monitoring.face_monitoring import detect_face
+
+from ai.intigrity_agent import generate_real_integrity_report
+from monitoring.face_monitoring import close_open_face_event
+
+# import sqlite3
+# import uuid
+# from datetime import datetime
+
+# from flask import Flask, redirect, render_template, request, session, url_for
+# from werkzeug.security import generate_password_hash, check_password_hash
+
+# from database import init_db, get_db
+# from camera import capture_photo
+# from monitoring.face_monitoring import detect_face
+# from monitoring.face_logger import log_face_state
+# from monitoring import event_detector 
+# from monitoring.integrity_score import compute_integrity_score
+# from monitoring.face_monitoring import close_open_face_event
+
+# from flask import Flask, redirect, request, render_template, session, redirect 
+# from database import init_db, get_db
+# from werkzeug.security import check_password_hash, generate_password_hash,check_password_hash
+# from werkzeug.utils import secure_filename
+# from database import init_db, get_db
+# from camera import capture_photo
 
 
 # ----------------------------------------
@@ -501,6 +529,16 @@ def submit_exam():
 
         connection.close()
 
+
+    # --------------------------------------------------
+    # 3. Close the final open face event
+    # --------------------------------------------------
+
+    close_open_face_event(
+        candidate_id,
+        exam_session_id
+    )
+
     # --------------------------------------------------
     # 4. Calculate final integrity score
     # --------------------------------------------------
@@ -509,6 +547,19 @@ def submit_exam():
         candidate_id,
         exam_session_id
     )
+
+
+    # --------------------------------------------------
+    # 5. Generate integrity report using AI agent
+    # --------------------------------------------------
+    report = generate_real_integrity_report(
+        candidate_id,
+        exam_session_id
+    )
+    
+    print("AI-Generated Integrity Report:")
+    print(report)
+
 
 
     # --------------------------------------------------
