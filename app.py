@@ -7,12 +7,14 @@ from flask import Flask, request, render_template, session, redirect, url_for
 from database import init_db, get_db
 from werkzeug.security import generate_password_hash, check_password_hash
 from camera import capture_photo
+from monitoring.alert_manager import create_alert, create_risk_alert
 from monitoring.face_logger import log_face_state
 from monitoring.face_monitoring import detect_face
 from monitoring import event_detector
 
 
 from datetime import datetime
+from monitoring.incident_logger import create_incident
 from monitoring.integrity_score import compute_integrity_score
 
 
@@ -26,27 +28,6 @@ from monitoring.integrity_score import compute_integrity_score
 from ai.intigrity_agent import generate_real_integrity_report
 from monitoring.face_monitoring import close_open_face_event
 
-# import sqlite3
-# import uuid
-# from datetime import datetime
-
-# from flask import Flask, redirect, render_template, request, session, url_for
-# from werkzeug.security import generate_password_hash, check_password_hash
-
-# from database import init_db, get_db
-# from camera import capture_photo
-# from monitoring.face_monitoring import detect_face
-# from monitoring.face_logger import log_face_state
-# from monitoring import event_detector 
-# from monitoring.integrity_score import compute_integrity_score
-# from monitoring.face_monitoring import close_open_face_event
-
-# from flask import Flask, redirect, request, render_template, session, redirect 
-# from database import init_db, get_db
-# from werkzeug.security import check_password_hash, generate_password_hash,check_password_hash
-# from werkzeug.utils import secure_filename
-# from database import init_db, get_db
-# from camera import capture_photo
 
 
 # ----------------------------------------
@@ -549,6 +530,14 @@ def submit_exam():
     )
 
 
+    create_risk_alert(
+        candidate_id=candidate_id,
+        session_id=exam_session_id,
+        risk_level=result["risk_level"],
+        integrity_score=result["integrity_score"]
+    )
+
+
     # --------------------------------------------------
     # 5. Generate integrity report using AI agent
     # --------------------------------------------------
@@ -596,7 +585,7 @@ def submit_exam():
             url_for("dashboard")
     }
 # ----------------------------------------
-# MONITOR FACE
+# Face MONITORING
 # ----------------------------------------
 @app.route("/monitor-face", methods=["POST"])
 def monitor_face():
@@ -749,6 +738,39 @@ def log_browser_event():
 
         # Save changes
         connection.commit()
+
+
+        print("================================")
+        print("BROWSER EVENT RECEIVED")
+        print("candidate_id:", candidate_id)
+        print("session_id:", exam_session_id)
+        print("event_type:", event_type)
+        print("details:", details)
+        print("================================")
+
+        # Run the rule-based suspicious event detection engine
+        rule_results=event_detector.evaluate_browser_event(
+            connection, candidate_id, exam_session_id, event_type
+        )
+        
+        print("rule_results:", rule_results)
+        
+        if rule_results:
+            create_incident(candidate_id = candidate_id,
+                            session_id= exam_session_id,
+                            event_type=rule_results["event_type"],
+                            description=rule_results["description"],
+                            severity=rule_results["severity"]
+                            )
+            create_alert(candidate_id = candidate_id,
+                         session_id= exam_session_id,
+                         alert_type=rule_results["event_type"],
+                         message=rule_results["description"],
+                         severity=rule_results["severity"]
+            )
+            
+
+
 
 
     except Exception as e:
