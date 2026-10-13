@@ -9,6 +9,8 @@ numpy
 langchain
 langchain-core
 langchain-openai
-openai
+langdetect
+streamlit
 
 Python -m pip install pandas metaplotlib seaborn scikit-learn
+
