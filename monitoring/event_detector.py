@@ -20,7 +20,7 @@ def _already_flagged(connection, session_id, event_type):
 
 def _raise_flag(connection, candidate_id, session_id, event_type, reason, severity):
     if _already_flagged(connection, session_id, event_type):
-        return
+        return None
 
     connection.execute("""
         INSERT INTO suspicious_events
@@ -53,8 +53,10 @@ def check_tab_switches(connection, candidate_id, session_id):
             "excessive_tab_switching",
             f"Candidate switched away from the exam tab {count} times, "
             f"exceeding the allowed limit of {TAB_SWITCH_LIMIT}.",
-            "High",
+            "High"
         )
+
+    return None
 
 
 # ------------------------------------------------------------
@@ -107,3 +109,5 @@ def evaluate_browser_event(connection, candidate_id, session_id, event_type):
 
     elif event_type == "focus_lost":
         check_focus_loss_frequency(connection, candidate_id, session_id)
+
+    return None
